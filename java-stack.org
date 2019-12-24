@@ -1,0 +1,98 @@
+#+TITLE: java-stack
+#+AUTHOR: renpeng
+
+
+** java重排序
+   java程序从编译到运行，会经历3个重排序过程，分别是
+   1. 编译重排序
+   2. 指令重排序
+   3. 内存系统重排序
+
+
+** java 集合数据结构
+   1. HashMap内部数据结构是一个二元结构，外层是一个数组，数组内元素则是一个列表。存取删元素时，会先通过key的hashcode取模，确定key在数组中的位置，再从链表中通过equal确定真正的key。
+      + 取模运算速度不及位运算，在hashMap中，巧妙的使用位运算来达到取模的效果，h & (length -1)。这决定了hashMap的length必须为2的次方
+      + 在存取删过程中，全程都是key在参与运算，valve做为附属信息只在最后存入了数据中
+
+   2. TreeMap是一个有序的Map，其内部使用红黑树保证排序。
+      + 红黑树有几个特性，1 根节点和叶子节点必须为黑色；2 红色的子节点必须为黑色；3 任意节点到到该节点的子孙节点所有路径上包含相同数目的黑节点。红黑树是接近平衡的二叉树
+      + 红黑树的常用操作为左旋和右旋
+
+
+** 双亲委派模型
+    让class和classloader具有优先级和层次关系；
+    确保系统类库不被篡改；
+    被同一个classloader加载的class才可以比较；
+
+** java并发
+1. volatile
+JMM通过汇编LOCK# 语义实现两个功能，1使当前缓存回写系统内存，2缓存一致性协议使其他CPU缓存行失效；
+2. synchronized
+jvm定义的同步机制，通过monitor做到线程同步
+3. 原子操作
+在CPU中，通过总线锁或缓存锁来保证同一时刻只有一个CPU(线程)操作。
+而在java中，通过cas自旋和锁来实现原子操作
+4. java内存模型
+堆、栈（CPU缓存）、计数器、方法区和本地方法区。
+并发程序中，JMM决定共享变量何时对另一个线程可见。
+5. 重排序
+从java源代码到最终执行的指令序列，会分别经历3中重排序，1编译器优化重排序，2指令级并行重排序，3内存系统重排序。
+1属于编译器重排序，2和3属于处理器重排序。
+
+6. 内存屏障
+在处理器中，通过在指令间插入内存屏障（Memory Barriers或Memory Fence）来阻止重排序，确定load和store关系，各处理器都支持store-load重排，它是一个全能型屏障，同时具备其他3个屏障的效果。
+
+7. happens-before关系
+从jdk1.5开始，java使用happens-before关系来阐述操作之间内存可见性。在JMM中，如果一个操作的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系.
+这里两个操作，可以是一个线程之内，也可以是在不同线程里。
+
+
+
+** osgi
+osgi模块化和面向对象所带来的能力都通过控制可见性和可用性来保证高内聚低耦合，只是粒度不一样，前者在组件层面，后者在对象层面。
+在标准的jar包的manifest文件中添加一些组件（bundle）的模块化特征（metadata）后，jar包就变成了一个bundle。
+bundle和普通jar包最大的区别就在于元数据。
+Bundle元数据的目的在于准确描述模块化相关的bundle特征，让OSGi框架对bundle进行各种处理工作（比如依赖解析，强制封装等），元数据主要有三部分：
+1. 可读信息（可选）.name doc url copyright等，osgi会忽略可读信息
+2. bundle标识（必须），Bundle-SymbolicName，Bundle-Version
+   bundle标识符用于唯一的标识一个bundle
+3. 代码可见性
+   代码可见性用于定义内部与外部代码。在JavaSE中的jar包如果放在classpath里，那么jar包对classpath下的所有程序都是可见的，并且可见性不能改变。而OSGi标准定义了如下的属性用于描述代码的可见性：
+   Bundle-ClassPath：定义了形成bundle的所有代码所在的位置，Java 中的classpath是定义的jar包的位置，而Bundle-ClassPath属性描述的是bundle内部类在bundle中的路径。例如：Bundle-ClassPath:.,other-classes/,embedded.jar
+   Export-Package：显式暴露需要和其它bundle共享的代码，每个包之间用逗号分隔，每个包可用修饰词来修饰包的其它特征，Export-Package: org.serc.hellworld; vendor=”SERC”,org.serc.hellworld.impl; vendor=”Gou Rui”
+   Import-Package：定义bundle所依赖的外部代码，其格式和Export-Package相同，并且也可以使用修饰词来修饰包。修饰词是用来限制所依赖包的范围的，类似过滤器，而不像Export-Package中用来声明包的特征。例如：Import-Package: org.serc.helloworld; vendor=”SERC”
+
+** java classloader和osgi classloader
+java classloader是以继承关系相互连接，依据双亲委派模型来加载类。java classloader中，应用的class都被同一个classloader加载，即class之间不存在隔离。
+OSGi则提供一种不同的方式来使用classloader。它并没有采用基于继承的方式而是使用了一种叫Classloader Chaining的概念，它允许细粒度的控制每个类之间的可见性。在一个上下文中，每个组件(Bundle)与一个专有的Classloader所关联。根据组件(Bundle)的配置(manifest.mf)，Classloader可以被连接到当前组件(Bundle)之外的其他组件(Bundle)的Classloader。但是在默认情况下，所有class都不能看到除自身之外的其他组件的class。因此我们必须通过在manifest文件中配置相应的package来显式的导入或导出它们。
+
+** 三种工厂模式总结
+简单工厂模式，实际是一个全能工厂。实例化不再直接new，而是通过工厂，根据用户条件实例化相关的类。
+优点
+1. 只需根据标识即可得到相应的类，在对象更换时无需修改客户端代码
+2. 工厂实例化类时可以加入额外的动作
+
+缺点
+1. 要实例化的类比较多的时候，代码变得臃肿。如同全能工厂一样，啥都生产，自然很庞大臃肿
+2. 更关键的是，在增加和删除类时，都需要修改工厂类代码
+
+工厂模式，按品牌（类型）各自独立工厂。同样封装了实例化过程，需要用户判断选择具体工厂类
+优点
+1. 解耦了简单工厂，各自示例化在各自的工厂中实现，符合开闭原则
+2. 更新实现类无需修改客户端
+3. 新增删除实现类，工厂相关类无需修改，客户端需要修改
+
+缺点
+1. 与简单工厂相反，工厂方法模式会导致工厂类过多
+2. 新增删除实现类，客户端需要修改
+
+
+前面两个工厂方法都有其应用场景与局限性，抽象工厂模式在此基础上更进了一层。它将一些相关的类型组成“类族”，由同一个工厂生产。这有点类似简单工厂和工厂方法的折中。
+
+
+** netty 百万长连接优化
+1. 调整主机可开句柄数
+2. 调整tcp读写缓冲区、内存
+3. 多网卡队列和软中断
+4. 设置合理的netty boss worker线程数（NioEventLoopGroup）
+4. 心跳优化：1. 及时检测失效的连接，并将其剔除，防止无效的连接句柄积压导致OOM；2. 设置合理的心跳周期，防止心跳定时任务积压，造成老年代积压，影响应用；3. 使用netty链路空闲检测机制

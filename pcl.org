@@ -1,0 +1,23 @@
+#+TITLE: python,c/c++,lisp
+#+AUTHOR: renpeng
+
+* python
+** 类与继承
+   1. Type函数可以动态生成类型（class），实质上pyton创建类的过程也是调用type()函数
+   2. type()函数可以动态创建类，metaclass可以动态控制类（增加方法、属性和过程），类似java动态生成类（动态字节码）
+   3. 装饰器在python中类似动态代理，装饰一个函数的调用，但是不影响函数执行。
+   4. 枚举类需继承Enum，直接通过ClassName.enumName获取枚举
+
+** 生成器generator
+   与列表生成式的样子很像，只不过generator使用小括号包裹，而列表生成式用中括号，
+   如:g = (x * x for x in range(10))
+
+   generator只定义了计算规则，一边循环一遍计算。反复调用next()方法获取下一个返回值。一般永远不会使用next方法，因为generator用for循环来迭代它。
+   如果一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator。yield关键字在generator中负责中断，下次调用next()在此中断的地方开始。
+
+* c/c++
+** inline--内联函数
+编译器直接用函数定义替换掉函数调用点。
+inline建议直接在h文件中定义
+inline函数只能包含小而精的代码逻辑，不能包含while、switch等复杂逻辑，并且不能是递归函数。
+类成员函数默认是inline

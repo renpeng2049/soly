@@ -1,0 +1,146 @@
+#+TITLE: 组件
+#+AUTHOR: renpeng
+
+* luence
+** 如何创建索引，步骤如下
+*** 第一步，原文档，document，可以是文本，文档（word）、html；
+*** 第二步，将原文档传递给分词组件（Tokenizer）
+分词组件会做以下几件事情，此过程称为tokenize
+1. 将文档分为一个一个独立的单词；
+2. 去除标点符号；
+3. 去掉停词；
+*** 第三步，将得到词元传给语言处理组件（linguistic Process）
+语言处理组件主要对词元做一些同语言相关的处理，例如对英语来说
+1. 变为小写；
+2. 将单词缩减为词根形式，如cars到car等，这种操作称为stemming；
+3. 将单词转变为词根形式，如drove到drive等，这种操作成为lemmatization
+*** 第四步，将得到的词（term）传给索引组件（Indexer）
+1. 利用得到的词（term）创建一个字典；
+2. 对字典按字母顺序排序；
+3. 合并相同的词成为文档倒排（Posting List）链表；其中包含document Frequency,Frequency
+
+** 如何查询索引
+*** 第一步，查询语句
+查询语句同我们普通的语言一样，也有一定语法；
+*** 第二步，对查询语句进行词法分析、语法分析及语言处理
+1. 词法分析主要用来识别单词和关键字；
+2. 语法分析主要根据查询语句的语法规则来形成一颗语法树；
+3. 语言处理同创建过程中的语言处理几乎相同；
+*** 第四步，根据得到文档和查询语句的相关性，对结果进行排序
+1. 找出词（term）对文档的重要性称为计算词的权重（term weight）的过程。计算词的权重有两个参数，一个是词（term），一个是文档（document）
++ term frequency(tf)，即此term在文档中出现了多少次，tf越大说明越重要；
++ document frequency（df），即有多少文档包含此term，df越大越不重要；
++ 根据上面两个参数使用负责的数学公式得出权重
+2. 判断词之间的关系从而得到文档相关性的过程应用一种叫向量空间模型的算法（Vector Space model）
++ 我们把文档（document）所有词term的权重（term weight）看作一个向量；
++ 同样把查询语句看作一个简单的文档，也用向量表示；
++ 把所有搜索出的文档向量放到一个N维空间中，每个词是1维；
++ 与查询语句向量夹角越小，则相关性越大。
+** luence 文件结构
+
+
+* elasticsearch
+** es 元素
+1. 节点，即运行实例
+2. index，es中的关键实体，类似与DB中的库。一个es可以拥有多个Index。
+3. 分片(shards)，es可以把每个Index分成多个小索引，每个小索引就是分片。
++ 主分片（Primary shard） 索引的子集，索引可以切分成多个分片（默认是5个），分布到不同的集群节点上。分片对应的是 Lucene 中的索引。
++ 副本分片（Replica shard）每个主分片可以有一个或者多个副本（默认1个）
+4. type相当于数据库中的table概念，mapping是针对 Type 的。同一个索引里可以包含多个 Type。
+5. Mapping 相当于数据库中的schema，用来约束字段的类型，不过 Elasticsearch 的 mapping 可以自动根据数据创建。
+6. 文档（Document) 相当于数据库中的row
+7. 字段（Field）相当于数据库中的column。
+8. 分配（Allocation） 将分片分配给某个节点的过程，包括分配主分片或者副本。如果是副本，还包含从主分片复制数据的过程。
+
+
+** 节点类型
+    1. master 只有一个，如果原master故障，自动选取一个成为新master。master节点负责索引新建和删除，跨节点shards分发；
+
+** DSL
+    dsl分为两部分，query和filter，query会进行分词，查询并打分；filter则筛选掉那些不符合条件的记录。
+    所以，推荐做法是，在query部分放影响打分的查询条件，其他的放到filter中。
+
+* RocketMQ
+** msg producer
+1. 实例化DefaultMQProducer类，设置producerGroup,namesrv,instanceName;
+2. start(),启动netty
+3. send()，获取topic路由信息，queue list，选择broker发送消息
+
+** msg consumer
+1. 实例化DefaultMQConsumer类，设置consumrGroup,namesrv,instanceName,topic
+2. 注册回调，启动start()
+   + 获取topic路由信息，queue list
+   + 启动PullService，借助Blockingqueue实现长轮询，快速响应和拉取消息；
+   + RebalanceService触发一个CountDownLatch条件，作为PullService的启动点，之后每30s从namesrv拉取路由和queue list，如果发现新路由则加入进来。
+
+* Nginx
+   自由、开源、稳定高效的web服务器，同时也是一个IMAP、POP3、SMTP代理服务器；nginx可以作为一个HTTP服务器进行网站的发布处理，另外nginx可以作为反向代理进行负载均衡的实现。
+*** Nginx配置详解
+
+** kafka
+   kafka配置中listener是对外暴露域名端口的，如果不配默认主机名，会记入到zookeeper的brokers中。这里就有可能导致机器名是字符串，而网络中其他主机不认识，连接不上的情况。
+
+
+** hdfs
+HDFS（Hadoop Distributed File System）是Hadoop项目的核心子项目，是分布式计算中数据存储管理的基础，是基于流数据模式访问和处理超大文件的需求而开发的，可以运行于廉价的商用服务器上。它所具有的高容错、高可靠性、高可扩展性、高获得性、高吞吐率等特征为海量数据提供了不怕故障的存储，为超大数据集（Large Data Set）的应用处理带来了很多便利。
+HDFS 采用Master/Slave的架构来存储数据，这种架构主要由四个部分组成，分别为HDFS Client、NameNode、DataNode和Secondary NameNode。
+
+** ai
+*** keras
+Keras 是一个用 Python 编写的高级神经网络 API，它能够以 TensorFlow, CNTK, 或者 Theano 作为后端运行.
+Keras 的开发重点是支持快速的实验。能够以最小的时延把你的想法转换为实验结果，是做好研究的关键。
+
+*** tensorflow
++ tensor 张量
++ 占位符
++ dataset数据集
++ 层
+
+
+* matric
+
+** Gauges
+Gauge是最简单的度量类型，只有一个简单的返回值，他用来记录一些对象或者事物的瞬时值。
+
+** Counter
+Counter是一个简单64位的计数器，他可以增加和减少。
+
+这种计数器也可以用来统计诸如当前有多少人在线，或者服务器中有多少处于有效期内的session
+
+** Meters
+Meter是一种只能自增的计数器，通常用来度量一系列事件发生的比率。他提供了平均速率，以及指数平滑平均速率，以及采样后的1分钟，5分钟，15分钟速率。
+
+** Histograms
+Histrogram是用来度量流数据中Value的分布情况，Histrogram可以计算最大/小值、平均值，方差，分位数（如中位数，或者95th分位数），如75%,90%,98%,99%的数据在哪个范围内。
+
+** Timer
+Timer是Histogram跟Meter的一个组合，比如要统计当前请求的速率和处理时间。
+
+** 容器,docker与k8s
+1. docker
+   docker最大的特点，轻。在docker之前，虚拟化只在操作系统层级，vmware和OpenStack
+   docker其他特点，进程级，秒级启动、资源占用少，弹性、负载、动态
+   docker本身并不是容器，它是创建容器的工具，是应用容器的引擎
+
+   docker 搭建（build）、发送（ship）、运行（run）。build once，run everywhere
+
+   docker的三大核心概念，镜像（Image），容器（container），仓库（Repository）
+   Image说白了就是一个特殊的系统文件，包含容器运行所需的程序、库、资源、配置等，Image不包含任何动态信息，其内容在构建后也不会改变；
+2. k8s
+   k8s是google开源的基于容器的资源管理平台，用来解决容器（docker）的编排、管理、调度等问题
+   一个k8s系统，通常称为k8s集群，包含master节点和一群node节点
+   master节点包含api server，scheduler，controller manager和etcd
+   node节点包含docker、kubelet,kube-proxy,fluentd,kube-dns，还有pod
+
+
+** elastic-job
+1. AbstractJobBeanDefinitionParser由spring扩展点加载
+2. spring扩展点加载的是初始化方法，真正加载应该在最后（由配置决定要不要延迟）
+3. 初始化coreconfiguration，registy供init方法调用。init方法在beandefinition指定；
+4. job信息存入zk
+
+** quartz
+1. quartz远程调度实现，quartz scheduler架构
+
+** mybaits
+1. springboot + mybatis 多数据源，定义数据源DataSource，定义sqlsessionfactory，注入mapper（xml或者dao）

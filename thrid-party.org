@@ -1,5 +1,7 @@
 #+TITLE: 组件
 #+AUTHOR: renpeng
+#+OPTIONS: toc:2
+
 
 * luence
 ** 如何创建索引，步骤如下
@@ -37,7 +39,6 @@
 + 把所有搜索出的文档向量放到一个N维空间中，每个词是1维；
 + 与查询语句向量夹角越小，则相关性越大。
 ** luence 文件结构
-
 
 * elasticsearch
 ** es 元素
@@ -77,15 +78,14 @@
    自由、开源、稳定高效的web服务器，同时也是一个IMAP、POP3、SMTP代理服务器；nginx可以作为一个HTTP服务器进行网站的发布处理，另外nginx可以作为反向代理进行负载均衡的实现。
 *** Nginx配置详解
 
-** kafka
+* kafka
    kafka配置中listener是对外暴露域名端口的，如果不配默认主机名，会记入到zookeeper的brokers中。这里就有可能导致机器名是字符串，而网络中其他主机不认识，连接不上的情况。
 
-
-** hdfs
+* hdfs
 HDFS（Hadoop Distributed File System）是Hadoop项目的核心子项目，是分布式计算中数据存储管理的基础，是基于流数据模式访问和处理超大文件的需求而开发的，可以运行于廉价的商用服务器上。它所具有的高容错、高可靠性、高可扩展性、高获得性、高吞吐率等特征为海量数据提供了不怕故障的存储，为超大数据集（Large Data Set）的应用处理带来了很多便利。
 HDFS 采用Master/Slave的架构来存储数据，这种架构主要由四个部分组成，分别为HDFS Client、NameNode、DataNode和Secondary NameNode。
 
-** ai
+* ai
 *** keras
 Keras 是一个用 Python 编写的高级神经网络 API，它能够以 TensorFlow, CNTK, 或者 Theano 作为后端运行.
 Keras 的开发重点是支持快速的实验。能够以最小的时延把你的想法转换为实验结果，是做好研究的关键。
@@ -95,7 +95,6 @@ Keras 的开发重点是支持快速的实验。能够以最小的时延把你�
 + 占位符
 + dataset数据集
 + 层
-
 
 * matric
 
@@ -116,7 +115,7 @@ Histrogram是用来度量流数据中Value的分布情况，Histrogram可以计�
 ** Timer
 Timer是Histogram跟Meter的一个组合，比如要统计当前请求的速率和处理时间。
 
-** 容器,docker与k8s
+* 容器,docker与k8s
 1. docker
    docker最大的特点，轻。在docker之前，虚拟化只在操作系统层级，vmware和OpenStack
    docker其他特点，进程级，秒级启动、资源占用少，弹性、负载、动态
@@ -132,15 +131,26 @@ Timer是Histogram跟Meter的一个组合，比如要统计当前请求的速率�
    master节点包含api server，scheduler，controller manager和etcd
    node节点包含docker、kubelet,kube-proxy,fluentd,kube-dns，还有pod
 
-
-** elastic-job
+* elastic-job
 1. AbstractJobBeanDefinitionParser由spring扩展点加载
 2. spring扩展点加载的是初始化方法，真正加载应该在最后（由配置决定要不要延迟）
 3. 初始化coreconfiguration，registy供init方法调用。init方法在beandefinition指定；
 4. job信息存入zk
 
-** quartz
+* quartz
 1. quartz远程调度实现，quartz scheduler架构
 
-** mybaits
+* mybaits
 1. springboot + mybatis 多数据源，定义数据源DataSource，定义sqlsessionfactory，注入mapper（xml或者dao）
+* slf4j & logback
+
+1. LoggerFactory里通过classloader读取"org/slf4j/impl/StaticLoggerBinder.class"文件，链接到具体实现类（如log4j或logback），这里是logback的StaticLoggerBinder
+2. StaticLoggerBinder
+   + new ContextInitializer()，并且调用autoConfig方法初始化logback。读取配置文件，实例化appenders对象和规则，并将appenders注入root logger对象
+   + new LoggerContext对象，LoggerContext构造方法中new Logger（root）。LoggerContext是ILoggerFactory的实例，所以slf4j中getILoggerFactory获得的是logback的LoggerContext对象。
+3. 调用logger对象的任意打印方法，将通过root生成以包名为层级的链式logger结构，存放在LoggerContext.loggerCache(Map<String,Logger>)中
+   + 构造LoggingEvent，从Logger对象中出去appenders，逐一处理loggerEvent，将其输出到对应的target。如果当前logger没有appender，则往上找一直到root
+
+调用关系图如下
+
+[[./puml/sfl4j&logback.png]]

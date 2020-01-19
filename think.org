@@ -1,5 +1,6 @@
 #+TITLE: 思考，方法论
 #+AUTHOR: renpeng
+#+OPTIONS: toc:2
 
 
 * 管理

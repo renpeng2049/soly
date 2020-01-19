@@ -1,0 +1,23 @@
+@startuml
+participant slf4j_LoggerFactory
+participant StaticLoggerBinder
+participant ContextInitializer
+participant LoggerContext
+participant Logger
+participant LoggerEvent
+participant Appenders
+participant fileOrConsole
+
+slf4j_LoggerFactory -> StaticLoggerBinder: classloader读取
+StaticLoggerBinder -> ContextInitializer: new LoggerContext，触发logback初始化
+ContextInitializer -> Logger: 读取logback.xml，生成appender对象，注入到root及配置中的logger
+StaticLoggerBinder -> LoggerContext: getILoggerFactory()
+LoggerContext -> Logger : getLogger(),由root创建子logger，并维护logger对象层级关系
+
+|||
+
+Logger -> LoggerEvent : 调用info()，生成LoggerEvent对象
+LoggerEvent -> Appenders: appenders链式处理le
+Appenders -> fileOrConsole: appender将内容写入对应outputstream
+
+@enduml

@@ -45,6 +45,19 @@
 ** mysql
 mysql提供多种存储引擎，用户还可以按照协议自定义存储引擎。innodb原本也是第三方引擎，擅长处理oltp业务，MyISAM引擎不支持事务，仅支持表级锁，擅长处理olap业务
 
+*** mysql体系结构
+
+1. mysql对外提供的交互接口（Connector）
+2. 管理服务组件和工具组件（Management service & Utilities）
+3. 连接池组件（Connection pool）
+4. sql接口组件（sql interface）
+5. 查询分析器组件（parser）
+6. 优化器组件（optimizer）
+7. 缓存组件（cache & buffer）
+8. 插件式存储引擎（Pluggable storage engine）
+9. 物理文件（file system）
+
+
 *** innodb体系架构
 1. 内存
    + 缓冲池，包括数据页、索引页、undo页、insert buffer，自适应哈希索引 adaptive hash index，innodb锁信息lock info，数据字典data dictionary

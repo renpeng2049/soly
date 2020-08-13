@@ -1,0 +1,68 @@
+@startuml
+
+class RepositoryWrapper {
+}
+
+class BlockchainImpl {
+}
+
+interface BlockStore {
+	
+}
+
+abstract class AbstractBlockstore {
+	
+}
+
+class IndexedBlockStore {
+	
+}
+
+
+interface org.ethereum.facade.Repository {
+	
+}
+
+interface Repository {
+	
+}
+
+class RepositoryWrapper {
+	
+}
+
+class RepositoryImpl {
+	
+}
+
+class RepositoryRoot {
+	
+}
+
+
+interface Blockchain {
+	
+}
+
+interface org.ethereum.facade.Blockchain {
+	
+}
+
+
+BlockStore <|.. AbstractBlockstore
+AbstractBlockstore  <|-- IndexedBlockStore
+
+
+org.ethereum.facade.Repository <|-- Repository
+
+Repository <|.. RepositoryWrapper
+
+Repository <|.. RepositoryImpl
+
+RepositoryImpl <|-- RepositoryRoot
+
+Blockchain <|.. BlockchainImpl
+org.ethereum.facade.Blockchain <|.. BlockchainImpl
+
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+interface EventHandlingStrategy {
+	void onMessage()
+}
+
+interface SessionFactory {
+	Session create()
+}
+
+interface SessionScheduleFactory {
+	SessionSchedule create()
+}
+
+interface SessionSchedule {
+}
+
+class SessionSettings{
+	
+}
+
+
+AbstractSocketInitiator <|-- SocketInitiator
+
+EventHandlingStrategy <|.. SingleThreadedEventHandlingStrategy
+
+SessionFactory <|.. DefaultSessionFactory
+
+SessionScheduleFactory <|.. DefaultSessionScheduleFactory
+
+SessionSchedule <|.. DefaultSessionSchedule
+
+@enduml

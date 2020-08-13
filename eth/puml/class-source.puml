@@ -1,0 +1,126 @@
+@startuml
+
+interface Source<K, V> {
+	void put(K key, V val)
+	V get(K key)
+	void delete(K key)
+}
+
+interface Trie<byte[]> {
+	byte[] getRootHash()
+	void setRoot(byte[] root)
+	void clear()
+}
+
+
+class TrieImpl{
+	public final class Node{}
+}
+
+
+abstract class AbstractChainedSource<Key, Value, SourceKey, SourceValue> {
+	
+}
+
+class SourceChainBox<Key, Value, SourceKey, SourceValue> {
+	
+}
+
+class ObjectDataSource<V> {
+	
+}
+
+abstract class AbstractCachedSource <Key, Value> {
+	
+}
+
+class WriteCache<Key, Value> {
+	
+}
+
+class XorDataSource<V> {
+	
+}
+
+abstract class AsyncWriteCache<Key, Value> {
+	
+}
+
+class BatchSourceWriter<Key, Value> {
+	
+}
+
+class BloomedSource {
+	
+}
+
+class CountingBytesSource {
+	
+}
+
+class JournalSource<V> {
+	
+}
+
+interface CachedSource<Key, Value> {
+	
+}
+interface BytesKey<Value> {
+	
+}
+
+interface BatchSource<K, V>{
+	
+}
+interface DbSource<V>{
+	
+}
+
+class RocksDbDataSource{
+	
+}
+class LevelDbDataSource{
+	
+}
+class SourceCodec<Key, Value, SourceKey, SourceValue>{
+	
+}
+class ReadCache<Key, Value> {
+	
+}
+class StateSource {
+	
+}
+
+Source <|-- Trie
+Source <|-- CachedSource
+Source <|-- BatchSource
+Source <|.. AbstractChainedSource
+
+
+SourceChainBox <|-- ObjectDataSource
+SourceChainBox <|-- StateSource
+Trie  <|.. TrieImpl
+
+AbstractChainedSource <|-- SourceChainBox
+AbstractChainedSource <|-- XorDataSource
+AbstractChainedSource <|-- AsyncWriteCache
+AbstractChainedSource <|-- AbstractCachedSource
+AbstractChainedSource <|-- BatchSourceWriter
+AbstractChainedSource <|-- BloomedSource
+AbstractChainedSource <|-- CountingBytesSource
+AbstractChainedSource <|-- JournalSource
+AbstractChainedSource <|-- SourceCodec
+
+CachedSource <|.. AbstractCachedSource
+CachedSource <|-- BytesKey
+
+AbstractCachedSource <|-- WriteCache
+AbstractCachedSource <|-- ReadCache
+
+BatchSource <|-- DbSource
+
+DbSource <|-- RocksDbDataSource
+DbSource <|-- LevelDbDataSource
+
+@enduml

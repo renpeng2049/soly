@@ -1,0 +1,24 @@
+@startuml
+
+
+class WorldManager {
+}
+
+class RepositoryWrapper {
+}
+
+class BlockchainImpl {
+}
+
+class RepositoryRoot {
+}
+
+
+WorldManager o-- IndexedBlockStore : blockStore
+WorldManager o-- BlockchainImpl : blockchain
+WorldManager o-- RepositoryWrapper : repository
+
+RepositoryWrapper o-- BlockchainImpl
+BlockchainImpl o-- RepositoryRoot : defaultRepository
+
+@enduml

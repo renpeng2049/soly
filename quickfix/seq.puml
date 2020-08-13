@@ -1,0 +1,34 @@
+@startuml
+actor actor
+participant SocketInitiator
+participant AbstractSocketInitiator
+participant DefaultSessionFactory
+participant DefaultSessionScheduleFactory
+participant SessionConnector
+participant Session
+participant IoSessionInitiator
+
+actor -> SocketInitiator : new(...)
+SocketInitiator -> AbstractSocketInitiator : super(...)
+AbstractSocketInitiator -> DefaultSessionFactory : new(...)
+DefaultSessionFactory -> DefaultSessionScheduleFactory : new(...)
+
+actor -> SocketInitiator : start()
+SocketInitiator -> SocketInitiator : initialize()
+SocketInitiator -> AbstractSocketInitiator : createSessionInitiators()
+AbstractSocketInitiator -> AbstractSocketInitiator : createSessions()
+
+AbstractSocketInitiator -> SessionConnector : createSession(SessionID sessionID)
+SessionConnector -> DefaultSessionFactory : create(...)
+DefaultSessionFactory -> Session : new(...)
+
+
+|||
+AbstractSocketInitiator -> AbstractSocketInitiator : createInitiator(Session)
+AbstractSocketInitiator -> IoSessionInitiator : new(...)
+
+SocketInitiator -> AbstractSocketInitiator : startInitiators()
+AbstractSocketInitiator -> IoSessionInitiator : start()
+
+
+@enduml

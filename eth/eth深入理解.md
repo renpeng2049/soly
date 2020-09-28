@@ -29,6 +29,7 @@ merkle树是自底向上构建的。在下图的例子中，首先将L1-L4四个
 
 ### 三种节点类型
 知道了Merkle Tree，知道了Patricia Tree，MPT（Merkle Patricia Tree）就是这两者混合后的产物。下面我们介绍一下MPT树的三种节点类型：
+
 1. 分支结点（branch node）：包含16个分支，以及1个value
 2. 扩展结点（extension node）：只有1个子结点
 3. 叶子结点（leaf node）：没有子结点，包含一个value

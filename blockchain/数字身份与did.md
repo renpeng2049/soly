@@ -28,3 +28,110 @@
 > 去中心化身份标识(Decentralized Identifier，DID)是一种新类型的标识符，具有全局唯一性、高可用性可解析性和加密可验证性。DIDs通常与加密材料(如公钥)和服务端点相关联，以建立安全的通信信道。DIDs对于任何受益于自管理、加密可验证的标识符(如个人标识符、组织标识符和物联网场景标识符)的应用程序都很有用。例如，当前W3C可验证凭据的商业部署大量使用DIDs来标识人员、组织和事物，并实现许多安全和隐私保护保证。 ——W3C 文档
 ## 可验证声明（Verifiable Claims）
 可验证声明用来证明实体的某些身份属性，它可以作为一个数据单元进行存储和传输，并可被任何实体验证。
+
+
+
+
+## TODO 信任模型梳理
+https://www.w3.org/TR/vc-data-model/#trust-model
+
+The verifiable credentials trust model is as follows:
+1. The verifier trusts the issuer to issue the credential that it received. To establish this trust, a credential is expected to either:
+   + Include a proof establishing that the issuer generated the credential (that is, it is a verifiable credential), or
+   + Have been transmitted in a way clearly establishing that the issuer generated the verifiable credential and that the verifiable credential was not tampered with in transit or storage. This trust could be weakened depending on the risk assessment of the verifier.
+2. All entities trust the verifiable data registry to be tamper-evident and to be a correct record of which data is controlled by which entities.
+3. The holder and verifier trust the issuer to issue true (that is, not false) credentials about the subject, and to revoke them quickly when appropriate.
+4. The holder trusts the repository to store credentials securely, to not release them to anyone other than the holder, and to not corrupt or lose them while they are in its care.
+
+This trust model differentiates itself from other trust models by ensuring the:
+1. Issuer and the verifier do not need to trust the repository.
+2. Issuer does not need to know or trust the verifier.
+
+1. 签名方式演变
+2. 数据保存方式演变
+
+
+## TODO ioa、微软身份认证、uport对比
+
+## TODO 撤销vc
+
+## TODO 选择性披露
+
+## TODO 智能合约权限架构
+
+## TODO 挑战challenge
+
+## TODO 一般用例
+「人是社会关系的总和」。通过对实体进行DID、凭证（Credential）的生成及绑定，可以更加准确完善地描述实体身份、实体间关系，并有效提高实体间信息流转的真实性和效率。
+
+### 案例一：新入职员工背景调查
+#### 背景
+合作方是一家中小企业，在招聘员工时需要对员工的学历信息、之前雇主信息进行真实性验证。存在的问题是：对员工而言，需要去每个机构花费大量时间精力获取最新版的材料。对企业而言，材料的获取和流转的过程中可能遭到篡改，而且缺乏验证材料真实性的手段。
+
+参与方：
+
+1. 员工
+2. 学校
+3. 前雇主公司
+4. 现雇主公司
+
+#### 流程
+1. 员工、学校、公司分别进行DID注册及KYC认证。
+2. 员工向学校学校申请学历证明凭证（Credential）、学位证明凭证（Credential）。
+3. 员工向前雇主公司申请工作证明凭证（Credential）、离职证明凭证（Credential）。
+4. 员工将这些凭证（Credential）挂到自己的个人主页上，或者直接提交给现雇主公司。
+5. 现雇主公司通过凭证验证（Verify）接口对上述凭证（Credential）进行验证。
+6. 验证通过，现雇主公司发放入职offer。
+
+### 案例二：数据共享
+#### 背景
+当前，不同机构间存在着大量用户数据流通的需求。然而，由于各个机构之间通常难以组建有效的信任合作机制，因此，各机构间难以将各自保管的用户数据安全可信地授权共享给其他机构。通过did解决方案，可帮助机构间进行可信数据授权及共享，使得各机构可基于全面的数据为用户提供更高质量的服务。
+
+参与方：
+
+1. 用户
+2. 数据持有机构
+3. 数据使用机构
+4. 身份证明机构
+
+#### 流程
+1. 在身份证明机构、数据持有机构、数据使用机构间搭建区块链网络，机构作为节点接入并注册DID。
+2. 由身份证明机构为用户进行KYC并生成DID
+3. 用户授权数据使用机构使用自己的数据
+4. 由身份证明机构为用户生成授权凭证（Credential），标明授权对象、数据属主、有效期、授权内容等属性，并使用用户私钥进行签名；身份证明机构可选择将授权凭证生成摘要并写入区块链，达到增信目的
+5. 数据使用机构出示授权凭证给数据持有机构
+6. 数据持有机构通过凭证验证（Verify）接口，验证授权凭证
+7. 验证通过，数据持有机构将数据发送给数据使用机构
+
+
+## 问题
+1. 自主身份相对于传统身份管理的优缺点？
+
+2. issuer可以作恶吗？
+   验证者信任issuer，和他所签发的vc。
+   issuer一般来自现实世界的机构、企业和其他可验证实体，issuer要表明自己身份，要么来自更权威的信任实体背书，要么尽可能全面的出示现实世界可验证的关联信息。
+   
+   如果再这种情况，issuer还出现作恶的情况，那么这不是技术的原因，而是背后使用的人的问题。
+3. 区块链如何杜绝中间人攻击？
+4. 存证与RSA accumulate两种方案的优劣？
+5. 区块链发票的实现原理？
+6. did恢复策略？
+
+
+## 思考
+1. 现实世界的信任，使用政府、媒体等公共机构提供的信息，外加亲身体验即可进行确认，虽然也不是100%确保可信。而网络世界中，信任的问题更加突出，任何信息都可以随意复制，修改然后再分发。
+2. 各个网络服务提供商（互联网公司）都提供一套自己的数字身份与权限管理功能，数据分散不互通，且容易丢失与泄露；
+3. 网络世界身份认证的另一方面，是基于中心化证书颁发机构的PKI体系，但是PKI多用于商业场景，成本不菲。而且CA机构在架构中存在中心化风险（CA机构攻击事件）。
+4. 借助分布式账本技术，可以实现数据共享、去中心化，（DPKI），为可信网络提供基础存储传播信任能力。
+5. 信任根还是来自于现实世界各可信机构，政府、中心化证书颁发机构。
+
+### 与微信等中心化身份系统场景对比分析
+| 编号 | 场景                                               | 微信场景                                             | did场景                              |
+|------|----------------------------------------------------|------------------------------------------------------|--------------------------------------|
+|    1 | 用户采用微信/did账号登录APP                        | 拉起微信                                             | 拉起did ua                           |
+|    2 | 用户确认授权某些信息                               | 在微信中同意授权                                     | 在did ua中选择相应的vc，同意授权     |
+|    3 | 302到APP server端，APP Server端调用API获取用户信息 | APP Server请求微信获取token，调用微信API获取用户信息 | APP Server到链上获取相关信息，验证vc |
+|    4 | APP server保存用户信息，维护登录态，并返回jwt到APP | 无                                                   | jwt是否可以直接使用vc?               |
+
+did在作为第三方登录时，与微信等中心化身份系统没有太多的区别，主要的优势还是在于可验证性、选择性披露等。
+倒是作为jwt的新形式，可以挖掘创新点。 

@@ -135,3 +135,12 @@ This trust model differentiates itself from other trust models by ensuring the:
 
 did在作为第三方登录时，与微信等中心化身份系统没有太多的区别，主要的优势还是在于可验证性、选择性披露等。
 倒是作为jwt的新形式，可以挖掘创新点。 
+
+
+## 对比
+1. did方案与蚂蚁链、微众链方案的异同；
+
+## 授权与认证
+OAuth是Authorization，即授权，在已知用户身份合法的情况下，经用户授权来允许某些操作，也就是让网站知道“你能被允许做那些事情”。
+由此可知，授权要在认证之后进行，只有确定用户身份只有才能授权。
+

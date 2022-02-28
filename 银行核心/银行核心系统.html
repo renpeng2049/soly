@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-12 周五 17:56 -->
+<!-- 2021-03-17 周三 20:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>银行核心系统</title>
@@ -193,6 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -223,47 +224,109 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5a3dd07">银行核心系统介绍</a>
+<li><a href="#org2957264">1. 银行核心系统介绍</a>
 <ul>
-<li><a href="#org48d6524">银行发展历程</a></li>
+<li><a href="#orgddf5436">1.1. 银行发展历程</a></li>
+<li><a href="#orgd419692">1.2. 核心业务模块</a></li>
+<li><a href="#org94881d4">1.3. 核心银行系统通用准则</a></li>
+<li><a href="#orgd936a69">1.4. 核心银行业务</a></li>
+<li><a href="#org0011746">1.5. 银行系统模块</a></li>
+<li><a href="#org2184bc2">1.6. 特殊组织架构的核心银行系统</a></li>
 </ul>
 </li>
-<li><a href="#org055df98">存款</a>
+<li><a href="#org5a32a00">2. 存款</a>
 <ul>
-<li><a href="#orgeb64ad5">核心系统中的存款功能</a></li>
-<li><a href="#org743c95e">核心系统模块</a></li>
+<li><a href="#orgc25ec13">2.1. 核心系统中的存款功能</a></li>
+<li><a href="#org8da4a3f">2.2. 核心系统模块</a></li>
 </ul>
 </li>
-<li><a href="#org3a10769">贷款</a></li>
-<li><a href="#org0713420">外汇</a></li>
-<li><a href="#orgbfaa445">财务</a>
+<li><a href="#org286dee0">3. 贷款</a></li>
+<li><a href="#orgd9ecb4b">4. 外汇</a></li>
+<li><a href="#org76b9f78">5. 财务</a>
 <ul>
-<li><a href="#org4a680f7">入账流程</a></li>
-<li><a href="#orgb619ee6">会计分录接口</a></li>
-<li><a href="#orgbe8644b">总账设计结构</a>
+<li><a href="#org673354c">5.1. 入账流程</a></li>
+<li><a href="#orgc24230e">5.2. 会计分录接口</a></li>
+<li><a href="#orgfa43ef7">5.3. 总账设计结构</a>
 <ul>
-<li><a href="#org1f7057d">独立的总账系统设计</a></li>
-<li><a href="#orgf463315">核心总账处理模式</a></li>
+<li><a href="#org7144a6a">5.3.1. 独立的总账系统设计</a></li>
 </ul>
 </li>
+<li><a href="#org8c9df61">5.4. 总账的生成</a></li>
+<li><a href="#orgf015ccb">5.5. 双边分录</a></li>
 </ul>
 </li>
-<li><a href="#orgd8833f3">账户</a>
+<li><a href="#orgba2bea6">6. 账户</a>
 <ul>
-<li><a href="#org0cc9e61">客户、卡、账户和产品</a></li>
-<li><a href="#org19107ed">一类户、二类户和三类户</a></li>
-<li><a href="#org130d301">冻结/解冻</a></li>
+<li><a href="#org3cb5371">6.1. 客户、卡、账户和产品</a>
+<ul>
+<li><a href="#org1ab3409">6.1.1. 内部账户体系</a></li>
+<li><a href="#org938521e">6.1.2. </a></li>
 </ul>
 </li>
-<li><a href="#org6748805">疑问</a></li>
+<li><a href="#orgeaad4c1">6.2. 一类户、二类户和三类户</a></li>
+<li><a href="#org8737635">6.3. 冻结/解冻</a></li>
+</ul>
+</li>
+<li><a href="#org4bf34aa">7. 银行卡</a>
+<ul>
+<li><a href="#orgb020583">7.1. 借记卡</a></li>
+<li><a href="#orgf28e0fb">7.2. 准贷记卡</a></li>
+<li><a href="#org2dbed48">7.3. 贷记卡</a></li>
+<li><a href="#orga7f41bc">7.4. 借贷记合一卡</a>
+<ul>
+<li><a href="#org5f9629a">7.4.1. 账单明细流程</a></li>
+</ul>
+</li>
+<li><a href="#org4fcd75c">7.5. 制卡、销卡过程</a></li>
+</ul>
+</li>
+<li><a href="#orgc82e550">8. 记账核心与综合前置</a></li>
+<li><a href="#orgb6ce335">9. 批量任务</a>
+<ul>
+<li><a href="#orgf40de6f">9.1. 批量作业调度架构设计</a></li>
+<li><a href="#orge9b8cfe">9.2. 应用系统批量划分</a></li>
+<li><a href="#org2835b3c">9.3. 并行批量实现方法</a>
+<ul>
+<li><a href="#org7b49c2b">9.3.1. 第一步：对数据库表进行分区</a></li>
+<li><a href="#org391e659">9.3.2. 第二步：建立批次的对应关系</a></li>
+<li><a href="#org0bbacc6">9.3.3. 第三步：建立数据访问的模式</a></li>
+<li><a href="#org6ac8aa9">9.3.4. 第四步：参数化设定批量单位</a></li>
+<li><a href="#orgead4e2d">9.3.5. 第五步：并行批量作业的提交</a></li>
+</ul>
+</li>
+<li><a href="#orgd80b4c8">9.4. 核心批量流程优化</a></li>
+<li><a href="#org97b4b44">9.5. 移行</a>
+<ul>
+<li><a href="#org131745f">9.5.1. 应用程序移行设计</a></li>
+<li><a href="#org4b12a49">9.5.2. 移行的处理流程</a></li>
+<li><a href="#org53b8d61">9.5.3. 移行的时间点考虑</a></li>
+</ul>
+</li>
+<li><a href="#org5c5e036">9.6. 工行的核心批量</a>
+<ul>
+<li><a href="#orgb181563">9.6.1. PARTITION 划分原则</a></li>
+<li><a href="#org94d3ed3">9.6.2. 逻缉整合后 PARTITION 的划分遵循以下原则：</a></li>
+</ul>
+</li>
+<li><a href="#org0bd6622">9.7. 并行批量单位划分原则</a></li>
+</ul>
+</li>
+<li><a href="#orgd5d569f">10. 灾备</a></li>
+<li><a href="#org8526376">11. 技术架构</a></li>
+<li><a href="#orgb245dd4">12. 业务架构</a></li>
+<li><a href="#org3de29a7">13. 支付</a></li>
+<li><a href="#org7932b2c">14. 中间业务</a></li>
+<li><a href="#orgb4241fd">15. 资金业务、同业、票据、债务</a></li>
+<li><a href="#orgb752e31">16. 后记-新纪元</a></li>
+<li><a href="#org72ca4e2">17. 疑问</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org5a3dd07" class="outline-2">
-<h2 id="org5a3dd07">银行核心系统介绍</h2>
-<div class="outline-text-2" id="text-org5a3dd07">
+<div id="outline-container-org2957264" class="outline-2">
+<h2 id="org2957264"><span class="section-number-2">1</span> 银行核心系统介绍</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 核心银行系统是银行信息系统中实现客户关系管理、产品与服务、业务流程、财务核算与管理、风险管控、辅助管理与决策等银行业务最核心功能的系统，是银行信息系统的基础和核心。
 </p>
@@ -273,9 +336,9 @@
 </p>
 </div>
 
-<div id="outline-container-org48d6524" class="outline-3">
-<h3 id="org48d6524">银行发展历程</h3>
-<div class="outline-text-3" id="text-org48d6524">
+<div id="outline-container-orgddf5436" class="outline-3">
+<h3 id="orgddf5436"><span class="section-number-3">1.1</span> 银行发展历程</h3>
+<div class="outline-text-3" id="text-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -319,14 +382,248 @@
 </table>
 </div>
 </div>
+
+
+<div id="outline-container-orgd419692" class="outline-3">
+<h3 id="orgd419692"><span class="section-number-3">1.2</span> 核心业务模块</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+根据《金融企业会计》书中的介绍，银行的核算业务主要有：
+</p>
+
+<p>
+存款业务、贷款业务、支付结算业务、外汇业务、现金业务、系统内联行往来业务、跨系统银行资金往来业务、代理业务、以及其他金融业务。而银行的核心系统基本上就是涵盖上述业务的模块。
+</p>
+
+<p>
+核心系统业务功能模块图
+</p>
+
+
+<div id="org1ca0d72" class="figure">
+<p><img src="./img/cbs-arch.jpg" alt="cbs-arch.jpg" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org94881d4" class="outline-3">
+<h3 id="org94881d4"><span class="section-number-3">1.3</span> 核心银行系统通用准则</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+无论是采取何种方式进行构建核心系统，都应正确把握核心系统在全行的定位，符合信息系统建设的架构，同时，遵照常见核心系统的构建准则。
+依照国际以及国内实际建设情况，对比银行核心系统转型的趋势，未来银行核心系统大多采用采用瘦核心架构设计，即核心系统应该具有如下特点：
+</p>
+<ol class="org-ol">
+<li>核心银行系统是典型的交易处理系统，具备处理客户账务及内部账务的分户核算处理。</li>
+<li>核心银行系统也是会计处理系统, 处理银行科目的清算核算。未来的核心银行系统通过架构整合，有机构成核心银行系统应用平台，对外是一个整体系统，对内则将银行的核心业务分散到一组系统分别完成。</li>
+</ol>
+
+
+<p>
+核心银行系统不是：
+</p>
+<ol class="org-ol">
+<li>核心银行系统不涉及直接面对客户的银行前端处理。</li>
+<li>核心银行系统不承担分析性工作，分析性应用通常是具备行业特征的数据仓库设计的一部分。</li>
+<li>核心银行系统通常只具备其业务处理和报表所必需的客户信息，但不包含全面的客户信息；一般银行会建立企业级客户信息，以支持多个系统互动和共享客户信息。</li>
+<li>核心银行系统在业务全流程操作中只承担账务处理功能，而业务操作流程由业务管理系统进行处理（如信贷流程管理、国际结算等）。</li>
+</ol>
+
+
+<p>
+通常情况下，核心银行系统应该是稳定的，尽量避免直接在源程序上调整。为了能够一个稳定的核心系统，满足灵活多变的业务需求，使用如下原则：
+</p>
+<ol class="org-ol">
+<li>尽量剥离业务流程管理功能，如信贷管理、风险管理、财务管理和柜员管理。</li>
+<li>采用高度模块化的结构设计，对其他系统提供多样化的标准账务服务。</li>
+<li>以参数化为基础的设计，支持弹性利率结构、产品期限、费用定价等功能，提供迅速、强大的新产品支持能力。</li>
+</ol>
+
+
+<p>
+核心银行系统应该可以有机地与其他系统整合，为了在其内部各模块之间、以及与其它系统之间有效衔接，实现数据同步，使用如下原则：
+</p>
+<ol class="org-ol">
+<li>从整体架构考虑，明确各系统的功能定位，并且在未来的实施中严格管理，杜绝功能重叠现象。</li>
+<li>建立面向服务的应用架构，利用企业服务总线，响应各系统间交互的请求。</li>
+<li>建立操作型数据存储平台，解决各系统间批量数据的整合分发。</li>
+<li>核心银行系统内建立总控模块，处理内部联系要求。</li>
+</ol>
+
+
+<p>
+核心银行系统应该是安全的，高可用的，为了降低操作风险和系统风险，使用如下原则：
+</p>
+<ol class="org-ol">
+<li>通过剥离非核心处理模块，减轻核心银行系统运行压力。</li>
+<li>通过利用专门的业务管理系统加强操作流程的管理和用户授权管理来强化核心业务安全能力。</li>
+<li>核心银行系统需要支持多渠道的业务处理能力，为了全面整合网上银行、手机银行、电话银行、自助银行以及呼叫中心的服务，实现统一的客户操作体验。</li>
+<li>在核心银行系统之外，建立统一渠道服务平台，实现对外服务的统一发布和交付管理。</li>
+</ol>
+
+
+<p>
+对于新业务领域的服务支持，考虑到信用卡业务、投资银行业务与银行传统的核心业务有较大区别，应与传统业务分开处理，采用不同的系统作为整体核心银行系统的不同交易模块完成相关的业务，依靠良好的应用架构实现跨系统跨模块的互连互通，其特点是：
+</p>
+<ol class="org-ol">
+<li>软件产品选择更灵活，可以选用不同的应用产品各展所长。</li>
+<li>未来发展空间更方便，容易增加新的业务系统。</li>
+<li>便于整体规划，分步实施，并兼容旧系统，减轻系统升级难度。</li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgd936a69" class="outline-3">
+<h3 id="orgd936a69"><span class="section-number-3">1.4</span> 核心银行业务</h3>
+<div class="outline-text-3" id="text-1-4">
+<ol class="org-ol">
+<li>存款业务
+单位和个人的各种银行存款业务，包括开户、存取款、销户、挂失冻结、账户管理等。</li>
+<li>贷款业务
+贷款发放、扣息、转期、收回、自动还款等。各种公司、个人贷款业务、委托贷款、按揭贷款等。</li>
+<li>结算业务
+包括现代化支付业务、承兑汇票业务、同城业务等。</li>
+<li>资金业务
+包括正常贴现、转贴现、再贴现、贴现收回等业务处理。拆借业务（系统内、外资金拆借、再贷款的处理）。</li>
+<li>保函业务
+包括保函协议的处理和保证金的处理。</li>
+<li>中间业务
+包括联机中间业务和非联机中间业务。</li>
+<li>现金业务
+包括柜员钱箱管理，现金领缴处理，柜员调剂处理，长短款处理以及假币处理等。</li>
+<li>凭证管理
+包括凭证调拨，凭证转移，凭证出售，凭证作废，凭证注销，凭证整理，挂失解挂等内容。</li>
+<li>投资业务
+短期投资、长期投资、回购；按不同债券类别分别进行分户管理，并设立登记簿以供查询和管理。</li>
+<li>期末业务
+包括存贷款计提利息，损益结转，利润分配，计算税金等内容。</li>
+<li>客户管理
+包括客户资料管理，客户帐号管理，客户信誉管理等。</li>
+<li>外币业务
+这部分主要是非贸易国际结算业务，包括结汇，售汇，套汇，直接套汇，外币兑换，钞汇互转等内容，外币账户的各种日常交易与本币完全一体化处理。</li>
+<li><p>
+内部清算
+系统内的资金实行实时的头寸资金调度和管理，辖内各核算主体行间核算，资金调拨、拆借管理等。
+然而并不是每家银行都有这些业务的，比如一些小的农商行、农信社就没有国际业务这一块。
+</p>
+
+<p>
+以下是某农信社的核心逻辑架构图：
+</p>
+
+
+<div id="org401fa6a" class="figure">
+<p><img src="./img/nongshanghang-arch.jpg" alt="nongshanghang-arch.jpg" />
+</p>
+</div></li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="outline-container-org0011746" class="outline-3">
+<h3 id="org0011746"><span class="section-number-3">1.5</span> 银行系统模块</h3>
+<div class="outline-text-3" id="text-1-5">
+<ol class="org-ol">
+<li>银行产品模块,包括活期存款和定期存款。
+活期储蓄存款:在核心系统中,每一个客户账户都需要根据资产或负债进行分类。活期储蓄存款定义中包括活期储蓄参数、产品属性、账户属性等。透支额度只能被附加到属于资产产品类的账户上。借记和贷记利息信息、 总账定义、利息应计和转本金频率、纳税计算和扣除参数等各种其它信息的定义均通过活期储蓄存款定义下的产品主界面完成。</li>
+<li>客户管理模块,保存基本的客户信息。
+客户管理涉及银行的整个流程,包括将新客户添加到银行的客户数据库, 对它们的详细信息实施后续维护以及客户和他们在银行的账户之间的对照关系。</li>
+<li>零售服务模块,客户协议的管理和执行。
+维护不同类型的客户协议,包括自动转存、现金归集和预约转账等 各类转出转入交易。系统支持日初、日终和各种周期的组合,以及指定的条件来执行协议。</li>
+<li>风险管理模块,提供黑名单功能。
+保存客户黑名单信息,黑名单状态在客户级进行维护。如果客户持 有多个账户,包括联名账户,那么所有账户被认为列入黑名单。</li>
+<li>信息数据模块,向客户发送短信、邮件等提示。</li>
+<li>业务服务模块,包括手续费、关系定价和利率功能。</li>
+<li>运作服务模块,实现清算和安全审计功能。</li>
+<li>技术服务模块,系统底层规则引擎、联机和批量接口功能。
+基于银行现有的 SOA 架构实现了一百多个标准接口,通过企业服 务总线(ESB)和文件传输服务(FTS)对外围系统提供联机和文件批量服务。</li>
+</ol>
+
+
+<p>
+核心系统与外围的关系图
+</p>
+
+
+<div id="orgf919649" class="figure">
+<p><img src="./img/cbs-arch2.jpg" alt="cbs-arch2.jpg" />
+</p>
+</div>
+
+<p>
+调用核心记账交易的系统举例
+</p>
+
+
+<div id="org978b413" class="figure">
+<p><img src="./img/cbs-sample.jpg" alt="cbs-sample.jpg" />
+</p>
+</div>
+
+
+<div id="org1dea9ed" class="figure">
+<p><img src="./img/cbs-arch3.jpg" alt="cbs-arch3.jpg" />
+</p>
+</div>
+
+<p>
+产品工厂－通过参数化定义完整配置新产品，无编码需要，快速向市场推出产品。
+</p>
+
+
+<div id="orga38244d" class="figure">
+<p><img src="./img/pro-factory.jpg" alt="pro-factory.jpg" />
+</p>
+</div>
+
+
+<div id="orgab360f4" class="figure">
+<p><img src="./img/pro-factory2.jpg" alt="pro-factory2.jpg" />
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org2184bc2" class="outline-3">
+<h3 id="org2184bc2"><span class="section-number-3">1.6</span> 特殊组织架构的核心银行系统</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+现代的核心都是支持分行级的，总、分核算等也有相应处理模块，支持多法人。
+</p>
+<ol class="org-ol">
+<li>分行模式
+<ul class="org-ul">
+<li>依附于银行核心系统，作为银行的一个分行进行管理。</li>
+<li>共享主机资源及各种系统的使用。</li>
+<li>共享客户信息、通存通兑、共享产品及参数、共享各种支付渠道。</li>
+<li>凭证管理、资金清算、报表归并区别于普通分行。</li>
+</ul></li>
+<li>独立法人模式
+<ul class="org-ul">
+<li>每个村镇银行作为独立的法人存在，有自己的总行和完整的机构体系。</li>
+<li>各法人拥有独立的参数和账户数据。</li>
+<li>支持分法人跑批和数据备份。</li>
+</ul></li>
+</ol>
+</div>
+</div>
 </div>
 
 
 
 
-<div id="outline-container-org055df98" class="outline-2">
-<h2 id="org055df98">存款</h2>
-<div class="outline-text-2" id="text-org055df98">
+
+
+<div id="outline-container-org5a32a00" class="outline-2">
+<h2 id="org5a32a00"><span class="section-number-2">2</span> 存款</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 存款指存款人在保留所有权的条件下把资金或货币暂时转让或存储与银行或其他金融机构，或者是说把使用权暂时转让给银行或其他金融机构的资金或货币，是最基本也最重要的金融行为或活动，也是银行最重要的信贷资金来源。
 </p>
@@ -354,16 +651,16 @@
 
 
 
-<div id="org339b346" class="figure">
+<div id="orgc66ea8f" class="figure">
 <p><img src="./img/prdts.jpg" alt="prdts.jpg" />
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-orgeb64ad5" class="outline-3">
-<h3 id="orgeb64ad5">核心系统中的存款功能</h3>
-<div class="outline-text-3" id="text-orgeb64ad5">
+<div id="outline-container-orgc25ec13" class="outline-3">
+<h3 id="orgc25ec13"><span class="section-number-3">2.1</span> 核心系统中的存款功能</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 核心一般情况下拥有的存款功能如下：
 </p>
@@ -384,29 +681,29 @@
 
 
 
-<div id="orgeaedee0" class="figure">
+<div id="org0d16c04" class="figure">
 <p><img src="./img/biz-case.jpg" alt="biz-case.jpg" />
 </p>
 </div>
 
 
 
-<div id="org2e17c80" class="figure">
+<div id="org04cbb47" class="figure">
 <p><img src="./img/constraint.jpg" alt="constraint.jpg" />
 </p>
 </div>
 
 
-<div id="orgf54487b" class="figure">
+<div id="orga1ba35f" class="figure">
 <p><img src="./img/ext-biz.jpg" alt="ext-biz.jpg" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org743c95e" class="outline-3">
-<h3 id="org743c95e">核心系统模块</h3>
-<div class="outline-text-3" id="text-org743c95e">
+<div id="outline-container-org8da4a3f" class="outline-3">
+<h3 id="org8da4a3f"><span class="section-number-3">2.2</span> 核心系统模块</h3>
+<div class="outline-text-3" id="text-2-2">
 <ol class="org-ol">
 <li>活期</li>
 <li>定期</li>
@@ -419,20 +716,20 @@
 
 
 
-<div id="outline-container-org3a10769" class="outline-2">
-<h2 id="org3a10769">贷款</h2>
+<div id="outline-container-org286dee0" class="outline-2">
+<h2 id="org286dee0"><span class="section-number-2">3</span> 贷款</h2>
 </div>
 
 
-<div id="outline-container-org0713420" class="outline-2">
-<h2 id="org0713420">外汇</h2>
+<div id="outline-container-orgd9ecb4b" class="outline-2">
+<h2 id="orgd9ecb4b"><span class="section-number-2">4</span> 外汇</h2>
 </div>
 
 
 
-<div id="outline-container-orgbfaa445" class="outline-2">
-<h2 id="orgbfaa445">财务</h2>
-<div class="outline-text-2" id="text-orgbfaa445">
+<div id="outline-container-org76b9f78" class="outline-2">
+<h2 id="org76b9f78"><span class="section-number-2">5</span> 财务</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 账务是记录具体业务经办时各种信息的汇总，指实现会计处理进行原始单证的收集、整理、记载、计算、结报等会计处理的具体事务，它要求规范、准确，保证会计核算，会计监督和会计准则的有效实施。
 </p>
@@ -461,17 +758,17 @@
 
 
 
-<div id="outline-container-org4a680f7" class="outline-3">
-<h3 id="org4a680f7">入账流程</h3>
-<div class="outline-text-3" id="text-org4a680f7">
+<div id="outline-container-org673354c" class="outline-3">
+<h3 id="org673354c"><span class="section-number-3">5.1</span> 入账流程</h3>
+<div class="outline-text-3" id="text-5-1">
 
-<div id="org3a064c3" class="figure">
+<div id="org7423da8" class="figure">
 <p><img src="./img/acnt-flow.jpg" alt="acnt-flow.jpg" />
 </p>
 </div>
 
 
-<div id="orgc363b73" class="figure">
+<div id="org50b72f8" class="figure">
 <p><img src="./img/acnt-flow2.jpg" alt="acnt-flow2.jpg" />
 </p>
 </div>
@@ -479,11 +776,11 @@
 </div>
 
 
-<div id="outline-container-orgb619ee6" class="outline-3">
-<h3 id="orgb619ee6">会计分录接口</h3>
-<div class="outline-text-3" id="text-orgb619ee6">
+<div id="outline-container-orgc24230e" class="outline-3">
+<h3 id="orgc24230e"><span class="section-number-3">5.2</span> 会计分录接口</h3>
+<div class="outline-text-3" id="text-5-2">
 
-<div id="org89efe3b" class="figure">
+<div id="orgbc75d1e" class="figure">
 <p><img src="./img/acnt-interface.jpg" alt="acnt-interface.jpg" />
 </p>
 </div>
@@ -496,19 +793,19 @@
 </div>
 
 
-<div id="outline-container-orgbe8644b" class="outline-3">
-<h3 id="orgbe8644b">总账设计结构</h3>
-<div class="outline-text-3" id="text-orgbe8644b">
+<div id="outline-container-orgfa43ef7" class="outline-3">
+<h3 id="orgfa43ef7"><span class="section-number-3">5.3</span> 总账设计结构</h3>
+<div class="outline-text-3" id="text-5-3">
 
-<div id="org810f1b2" class="figure">
+<div id="org6802158" class="figure">
 <p><img src="./img/general-ledger.jpg" alt="general-ledger.jpg" />
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1f7057d" class="outline-4">
-<h4 id="org1f7057d">独立的总账系统设计</h4>
-<div class="outline-text-4" id="text-org1f7057d">
+<div id="outline-container-org7144a6a" class="outline-4">
+<h4 id="org7144a6a"><span class="section-number-4">5.3.1</span> 独立的总账系统设计</h4>
+<div class="outline-text-4" id="text-5-3-1">
 <ol class="org-ol">
 <li>按原始货币记账</li>
 <li>内部预留多账套机制</li>
@@ -539,39 +836,904 @@
 <li>便于总行有充足的对外支付能力</li>
 <li>降低金融风险</li>
 </ol>
+
+
+
+<p>
+核心总账处理模式
+<img src="./img/gl-flow.jpg" alt="gl-flow.jpg" />
+</p>
+
+<p>
+总账汇总模式
+<img src="./img/gl-statstc.jpg" alt="gl-statstc.jpg" />
+</p>
+
+<p>
+汇总模式包括：虚拟机构汇总、虚拟币种汇总、虚拟科目汇总和其他口径汇总（产品、客户）。
+</p>
+</div>
 </div>
 </div>
 
 
 
-<div id="outline-container-orgf463315" class="outline-4">
-<h4 id="orgf463315">核心总账处理模式</h4>
+<div id="outline-container-org8c9df61" class="outline-3">
+<h3 id="org8c9df61"><span class="section-number-3">5.4</span> 总账的生成</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+<img src="./img/gl-flow2.jpg" alt="gl-flow2.jpg" />
+核心系统完成全行帐务实时帐务处理，基于效率和应用实用性考虑，数据需保持在一个可控的规模下，并且面向管理、分析的OLAP应用应该与实时业务系统群在系统及网络层隔离，也即在核心系统外需要建立后续管理分析应用和历史查询运用，其上的大量数据需要通过定时的ETL过程将主机上的数据，选择性的传输到相关应用中。ETL过程可配置实现对主机数据的清理、复制和迁移。
+</p>
+
+<p>
+核心系统内部数据模型，也按明细核算和综合核算的功能，划分到核心层和产品层进行管理，不同的金融产品，可灵活设置不同数据库表管理其相应业务。而核心层的总帐数据模型，不因业务的变化而发生变化。实现中，核心层数据与产品层数据通过分录流水作为桥梁，通过标准的数据访问通道关联业务的明细核算和综合核算，在产品层的业务处理中，只操作单一、标准的数据库表，屏蔽了产品业务变化对核心层的影响。
+</p>
+
+<p>
+具体来看交易过程中的帐务登记流程如下：
+</p>
+<ol class="org-ol">
+<li>日常交易发生时，交易首先登记柜员日志，然后按交易码进入不同的服务处理流程，进行产品层的明细核算，最后登记系统统一的分录流水，记载相应的核算信息。</li>
+<li>日终交易处理时，系统从分录流水中获取核算信息，分别登记主机的主帐、二级科目总帐和一级科目总帐，由于系统主帐信息反映了分户的汇总归类，实现上几乎全部的报表都可以依据总帐数据进行生成。同时，基于24小时实现逻辑支撑，在日终过程中，分户信息将不被更改，因此可以通过一级总帐科目与分户的余额对比实现系统的总分检查</li>
+<li>对于系统内部帐而言，当通过内部帐记账交易处理时，系统将实时登记内部帐分户及分户明细；当内部帐记账为其他交易联动完成时，系统根据配置信息，确定内部帐是实时登记还是日终汇总登记。通过汇总登记可以简化内部帐帐页输出；同时还可以提高应用处理效率，规避业务处理瓶颈。</li>
+<li>面向核心的分录流水，除了完成日终的综合核算外，也为将来的管理分析应用提供了重要信息来源，因此，分录流水中除了记录核算信息外（机构、币种、科目代码等）还需记录交易的其他属性，包括：客户类型、产品码、部门。并基于上述维度创立面向核算的主帐结构和面向管理的产品总帐结构。核算主帐结构中含核算机构、币种、科目和子目维度；产品总帐结构中含核算机构、币种、科目代码、部门、产品、客户类型维度。将来的分析管理系统可以基于产品总帐数据.</li>
+</ol>
+
+
+<p>
+上述维度的取值规则如下：
+</p>
+<ol class="org-ol">
+<li>按分录流水中的账号获取核算机构、币种、科目、子目；</li>
+<li>与客户帐有关的分录，按客户帐的资料和对应关系登记部门、产品和客户类型信息；涉及内部帐有关的分录，其部门、产品和客户类型等信息与客户帐相同；</li>
+<li>单纯涉及内部帐的交易，其部门、产品和客户类型设为省缺值。三个信息子段的省缺值均为“9999”。</li>
+</ol>
+
+
+
+
+
+<p>
+帐务登记的原则是客户帐资料、登记簿、流水等在日间时产生并实时登记、更新。内部帐、主帐、总帐在日终时通过分录流水完成登记、更新。这样做的好处在于提供了交易的并发度支持，特别是将来核算单元上收后，对内部帐、主帐的高并发度要求，避免了这些资源的锁冲突。
+</p>
+
+<p>
+处理要求
+</p>
+<ol class="org-ol">
+<li>实时产生分录流水，分录流水中要有交易机构、核算机构、部门、产品码、客户类型、是否日终记内部帐标志。</li>
+<li>在内部帐分户中要有标志明确说明是否需要记录明细帐；该标志在科目代号字典中可以设置。</li>
+<li>手工发起的内部帐记帐实时登记内部帐及明细。</li>
+<li>对于部分需要进行余额控制的处理，例如：头寸控制等，可通过专门设置余额控制登记簿进行控制。</li>
+</ol>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orgf015ccb" class="outline-3">
+<h3 id="orgf015ccb"><span class="section-number-3">5.5</span> 双边分录</h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+系统中除了表外科目可以使用单边分录外，所有记帐都使用双边分录，达到每笔交易的自平衡。如果存在业务上的交易动作分离情况，将使用系统统一的机构挂帐户进行过渡处理，在进行过渡处理时，系统除了记录该账户的分录，还需记录柜员临时存欠登记簿，登记簿采用销账方式管理。与丁种帐不同之处在于，该账户的销账允许部分销账，解决一借多贷或一贷多借情况，如果存在多借多贷情况，原则上必须自平衡或通过中间临时存欠账户管理，转换为上述两种情况。
+</p>
+
+<p>
+机构挂帐户记账规则:
+</p>
+<ol class="org-ol">
+<li>采用机构挂帐户进行处理;</li>
+<li>在正常交易情况下，每日账户余额应为0，但在特殊情况下，如：机构网络中断情况，该账户有可能存在余额不为0的情况。</li>
+<li>为避免虚增对机构挂帐户的发生额，规定对该账户的记账为转账、借贷标志只为借，也即交易时可能的分录为借方蓝字或借方红字。</li>
+<li>在记录机构挂账户时需要同时进行柜员临时存欠登记簿的登记。</li>
+<li>柜员在签退时，除了上缴尾箱、进行柜员轧帐外，还需检查柜员临时存欠登记簿，检查柜员有无关联交易未完成。</li>
+<li>在交易进行抹帐处理时，必须首先检查该交易是否已被核销，若已被核销，首先对核销交易进行抹帐处理，或通过冲正交易完成对交易的调整。</li>
+</ol>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd8833f3" class="outline-2">
-<h2 id="orgd8833f3">账户</h2>
-<div class="outline-text-2" id="text-orgd8833f3">
-</div>
-<div id="outline-container-org0cc9e61" class="outline-3">
-<h3 id="org0cc9e61">客户、卡、账户和产品</h3>
-</div>
 
-<div id="outline-container-org19107ed" class="outline-3">
-<h3 id="org19107ed">一类户、二类户和三类户</h3>
-</div>
+<div id="outline-container-orgba2bea6" class="outline-2">
+<h2 id="orgba2bea6"><span class="section-number-2">6</span> 账户</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+建立以客户为中心的统一帐务体系，以客户号为为主导，联系所有与客户相关的帐户信息，所有帐户共用唯一的客户信息。银行自身的帐务做为一类特殊的帐户，客户缺省为银行自身，在此称其为内部帐。帐户管理体系采用统一的多分户模式，不论对私对公，均采用客户帐号+款项代码方式，以客户帐号做为面向外部客户的唯一形式，由系统内部管理其下的所有款项，使系统从底层基础支持多重帐户的管理，并可为每个款项建立与其他帐户的相关性，实现不同层次类别的帐户管理。
+</p>
 
-<div id="outline-container-org130d301" class="outline-3">
-<h3 id="org130d301">冻结/解冻</h3>
+
+<div id="org19a841c" class="figure">
+<p><img src="./img/gl-struct2.jpg" alt="gl-struct2.jpg" />
+</p>
 </div>
 </div>
 
+<div id="outline-container-org3cb5371" class="outline-3">
+<h3 id="org3cb5371"><span class="section-number-3">6.1</span> 客户、卡、账户和产品</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+客户账号
+</p>
+<ol class="org-ol">
+<li>是指面向客户，客户能够实际看到的帐号，也可以称为主帐号。
+例如：存折上打印的活期存款帐号、单位客户购买和签发支票时使用的用于结算的支票户帐号、储蓄卡卡号、一本通的主帐号、定期存单的帐号等。</li>
+<li>客户帐户存储帐户的静态信息 。</li>
+</ol>
 
 
-<div id="outline-container-org6748805" class="outline-2">
-<h2 id="org6748805">疑问</h2>
-<div class="outline-text-2" id="text-org6748805">
+<p>
+款项代码
+</p>
+<ol class="org-ol">
+<li>款项是形成帐户的最基本元素。</li>
+<li>每个款项对应一具体的银行业务产品。</li>
+<li>因此款项具有归属机构、归属产品、归属核算代码、归属币种等属性，对具体款项属性及具备功能的规定是从产品参数中定义的。例如存入一笔人民币1000元的活期存款，系统为其自动建立对应的一个存款类款项代码，管理这笔存款。</li>
+<li>划分款项后，可通过对各种款项的整合建立综合帐务管理。</li>
+</ol>
+
+
+
+<p>
+建立以“款项”管理为基础建立综合账务管理体系
+<img src="./img/acnt-struct3.jpg" alt="acnt-struct3.jpg" />
+</p>
+
+
+<p>
+每个产品下允许有哪些款项可根据需要进行配置 , 也可具有单一款项
+</p>
+<ol class="org-ol">
+<li>对基础款项按照子产品配置，银行进行产品包装，组成具有单一功能或具有组合功能的产品；</li>
+<li>从帐户的角度说，即为客户提供具备各种不同功能组合的户口；</li>
+<li>款项代码客户不可见，而是由系统提供列表形式给操作人员选择款项由客户确认；</li>
+</ol>
+</div>
+
+
+
+<div id="outline-container-org1ab3409" class="outline-4">
+<h4 id="org1ab3409"><span class="section-number-4">6.1.1</span> 内部账户体系</h4>
+<div class="outline-text-4" id="text-6-1-1">
+
+<div id="org36b1fd2" class="figure">
+<p><img src="./img/internal-acnt.jpg" alt="internal-acnt.jpg" />
+</p>
+</div>
+
+<p>
+帐号的组成规则：为便于记忆，一般不同于客户帐号，
+如一般可为：机构号＋币种＋科目编号＋顺序号。
+</p>
+
+<ol class="org-ol">
+<li>标准户
+系统核算需要统一开立的帐户。
+自动产生会计分录。
+例如现金帐号、应收利息、应付利息等需要自动记帐的帐户。</li>
+<li>销账类账户
+管理逐笔明细，支持部分销帐。例如应解汇款帐户。</li>
+<li>清算帐户
+用于结算不同金融机构之间债权、债务关系的帐户
+允许透支，系统自动结息；
+透支可自动强制拆借；
+清算帐户为标准户；</li>
+<li>过渡账户
+基于核算和管理需要设置，如：通存通兑过渡户，电子汇兑过渡户等。</li>
+<li>凭证账户
+表外管理，分为在库户，在用户，待销毁户；
+重要空白凭证：记录张数，一张代表一元；
+有价单证：记载有价单证的余额。余额＝有价单证张数×有价单证面额</li>
+<li>手工账户
+手工管理，面向传票记帐</li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="outline-container-org938521e" class="outline-4">
+<h4 id="org938521e"><span class="section-number-4">6.1.2</span> </h4>
+</div>
+</div>
+
+
+<div id="outline-container-orgeaad4c1" class="outline-3">
+<h3 id="orgeaad4c1"><span class="section-number-3">6.2</span> 一类户、二类户和三类户</h3>
+</div>
+
+<div id="outline-container-org8737635" class="outline-3">
+<h3 id="org8737635"><span class="section-number-3">6.3</span> 冻结/解冻</h3>
+</div>
+</div>
+
+
+
+<div id="outline-container-org4bf34aa" class="outline-2">
+<h2 id="org4bf34aa"><span class="section-number-2">7</span> 银行卡</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+银行卡作为我国电子支付的主要凭证逐渐取代了原有的存折、存单等成为广大的个人用户在银行开户的首选目标。
+</p>
+</div>
+
+
+<div id="outline-container-orgb020583" class="outline-3">
+<h3 id="orgb020583"><span class="section-number-3">7.1</span> 借记卡</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+客户所持的借记卡与银行为该客户开立的内部核算账户：
+<img src="./img/card-acnt.jpg" alt="card-acnt.jpg" />
+</p>
+
+<p>
+借记卡起源于传统的银行个人储蓄业务。传统银行业务是严格按照会计核算准则开展的,其业务设计的模式,资金运用的过程,成本收益的核算方式都遵循会计核算的基本原理。账户是银行内部的会计核算单位,现在银行一般是不会将其直接展现给最终客户的,通常银行会通过客户凭证将账户进行包装,我们所见到的借记卡、存折、支票等都是客户凭证,而借记卡则是运用最广泛的客户凭证。
+借记卡提供对外服务,在卡下面绑定了各式各样的账户,银行实际为客户提供各种金融类服务是通过各类不同科目、不同账户性质的内部核算账户进行的,而借记卡本身只不过是一种载体或者媒介,它将各类账户与个人联系起来,并使其对最终用户透明,使客户不用陷入纷乱的账户的困扰,从而达到更好的服务效果。
+<img src="./img/card-func.jpg" alt="card-func.jpg" />
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgf28e0fb" class="outline-3">
+<h3 id="orgf28e0fb"><span class="section-number-3">7.2</span> 准贷记卡</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+上世纪末中国的银行界曾经推广过一种叫准贷记卡的银行卡产品,实际上这种产品的推出实属无奈之举。当时中国的银行卡业务正处于发展时期,由于各种实际的困难无法引进适合中国国情的贷记卡产品也没有足够的实力从头开发贷记卡系统,因此只能通过改造自有的借记卡系统来推出一款类似于贷记卡的产品。从某种意义上来说这也是最早的基于银行核心账务系统构建借贷记合一的银行卡的尝试。
+准贷记卡模型中余额仍然保持唯一,因此无论对准贷记卡账户进行借记还是贷记操作,相应的程序动作都是规范的增加或者减少此账户余额,就记账本身而言并不存在任何差异。这种余额不同于普通会计意义上的借贷记双向反映形式的余额,本模型中的余额在不同的时期隶属于不同的会计科目,当其余额为正时属于客户存款科目,当其余额为负时属于个人透支科目,这是由于会计核算的基本原则决定的。因此这一模型存在着几个无法规避的缺陷导致其最终被淘汰。
+其中之一是无法实现灵活的计息方式。
+由于余额隶属账户的可变性,系统在计息处理时不能使用传统的“动户滚积数”方式计算利息、,更不能直接根据发生额明细推算出相应利息,而是要在每一次记账过程中增加相应的结算利息代码,这使得利息计算方式较为复杂和呆板。这一点矛盾是非常突出的,正因如此我们无法基于这一模型开发出与贷记卡相仿的整套免息消费式的循环账单流程,只能退而求其次所有透支消费自消费日起就开始收取透支利息,最终形成了准贷记卡这一过渡性的银行卡产品。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2dbed48" class="outline-3">
+<h3 id="org2dbed48"><span class="section-number-3">7.3</span> 贷记卡</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+国内一些银行因为历史原因贷记卡系统不在核心系统内，但国外核心系统都有贷记卡模块。故，也放在核心系统系列一起介绍。
+贷一记卡的业务功能,普遍采用了结构化的余额处理方式
+贷记卡账户的余额是由多组余额构成的,有的系统甚至由四、五十个余额构成,一个贷记卡账户往往是一条非常庞大的数据库记录,拥有着数百个属性。
+贷记卡账户的余额不再是一个数字,而是一个结构,在这个结构中有资产有负债,有的余额还会和具体的账单日期有关,甚至我们都一时无法弄清楚客户到底欠了银行多少钱。同时这些余额除少数仍旧代表着客户的金融资产、负债外,绝大部分余额参与到了实现贷记卡各种业务功能中去了。一个账户多个余额,这与前面描述的银行会计的核心思想产生了极大的冲突,与传统银行业务体系支撑下的借记卡系统格格不入。
+</p>
+
+
+<div id="orgde86871" class="figure">
+<p><img src="./img/credit-card.jpg" alt="credit-card.jpg" />
+</p>
+</div>
+
+<p>
+一般来说银行是不鼓励或者说不接受客户向纯贷记卡中进行存款的,这就意味着如果客户强行向贷记卡中存款的话这笔资金除用于还款外不会享受到银行的其他增值服务,甚至在客户通过柜面或者ATM取款机取款时还要被收取相关手续费。
+信用额度是贷记卡的基础,额度的高低一般由发卡行根据持卡人的个人情况核定。从客户角度来看每张贷记卡一般会有两个额度,分别是信用额度和预借现金额度。所谓信用额度,就是贷记卡持卡人被允许透支的最高金额。而预借现金额度则是持卡人被允许的直接通过提款机提取现金最高金额
+消费形式:预授权类的消费是指使用预授权和预授权完成两个交易来执行的消费交易的过程,通常这类消费主要发生在宾馆等服务行业消费中,一般宾馆为了保护自己的利益会在持卡人入住宾馆时要求刷一次卡,这次刷卡的目的是为了确定持卡人的支付能力并根据持卡人的入住要求通过银行锁定一部分客户资金,等到持卡人退房进行结算的时候宾馆会要求持卡人再次刷卡,这次刷卡才会最终将持卡人卡内资金扣除并通过银行划付给相应的商户。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga7f41bc" class="outline-3">
+<h3 id="orga7f41bc"><span class="section-number-3">7.4</span> 借贷记合一卡</h3>
+<div class="outline-text-3" id="text-7-4">
+
+<div id="org22e5a5f" class="figure">
+<p><img src="./img/deb-crd-card.jpg" alt="deb-crd-card.jpg" />
+</p>
+</div>
+
+<p>
+这个账户模型在传统的借记卡中增设了一个“消费透支专用账户”。传统的借记卡中仅使用一个人民币活期账户来处理所有的人民币活期类业务。当发生存款、汇入、贷发等业务时,贷记人民币活期账户,使该账户的余额增加;当发生取款、消费类业务时借记人民币活期账户,使该账户的余额减少,同时必须保证该账户的余额必须永远大于等于零,当借记动作导致该余额为负数时记账动作将遭到拒绝。该模型继承了传统借记卡中的对人民币活期账户的绝大部分操作方式,仅仅针对消费类交易的记账方式做了突破性的变更。
+</p>
+
+<p>
+首先该模型中增设了一个“消费透支专用账户”,这个账户属于贷方账户,即当该账户的余额大于零时代表了客户对于银行来说有着相应金额的欠款(或则可以称为透支);其次该模型修改了消费类交易的一记账方式,消费类交易在一定的条件下会自动选择该账户进行记账,借记消费透支专用账户,增加该账户的余额,从而做到使用银行资金先行为客户垫款支付相应的消费费用,从客户的角度看来就是进行了透支消费;最后,当还款日到来时设计相应的模块根据消费情况计算出应还款金额通过扣收人民币活期账户中的相应金额来充抵消费透支专用账户中的消费透支金额。这一账户的计息方式与传统账户的计息方式不同,它并不是从扣账之日起就开始计算利息的,通常当客户在指定日期全额还款后,其相应的透支利息就会被免去。
+</p>
+
+
+<div id="orge52be15" class="figure">
+<p><img src="./img/deb-cred-flow.jpg" alt="deb-cred-flow.jpg" />
+</p>
+</div>
+
+<p>
+“透支取现专用账户”,这个账户仍属于贷方账户,即当该账户的余额大于零时代表了客户对于银行来说有着相应金额的欠款(或则可以称为透支),与消费透支账户不同的是该账户的计息方式设置成无免息的方式,即一旦记账确认便从即日起计算并扣收透支利息;同时修改ATM取款交易的记账方式,在一定的条件下会自动选择该账户进行记账,借记透支取现专用账户,增加该账户的余额,同时通过ATM取款机吐出相应的现金,从客户的角度看来就是进行了透支取款;最后,增设相应的还款交易,允许客户通过该交易进行还款同时收取相应的透支利息。通常根据行业规范,ATM透支取现是要除利息之外收取一定手续费的,在这个模型中的实现方式是:ATM取款交易在记取款账的同时依据费率计算相应的手续费值,并且模拟消费交易直接借记消费透支专用账户,这样相应的手续费就可以反映到下一期的客户账单中,通知客户进行还款
+</p>
+
+
+<div id="org80f55a3" class="figure">
+<p><img src="./img/deb-cred-flow2.jpg" alt="deb-cred-flow2.jpg" />
+</p>
+</div>
+
+<p>
+客户通过ATM发起取款交易时先根据该卡的实际情况判断是否可以进行透支取款,如果可以,则先依据费率计算相应的手续费值,并且模拟消费交易直接借记消费透支专用账户,然后从透支取现专用账户中扣出取现金额。对比贷记卡的透支取现业务,可以看出该模型非常完美的进行了模拟。从客户角度来看其业务流程是完全是一样的,从银行角度来看这个模型清晰地反映了客户的资产、负债情况,同时由于各类账户分设,可以采用不同的计息方式,精确的收取或减免客户利息,完全克服了准贷记卡的尴尬之处。
+</p>
+</div>
+
+<div id="outline-container-org5f9629a" class="outline-4">
+<h4 id="org5f9629a"><span class="section-number-4">7.4.1</span> 账单明细流程</h4>
+<div class="outline-text-4" id="text-7-4-1">
+<p>
+<img src="./img/cred-flow.jpg" alt="cred-flow.jpg" />
+程序运行时会对每一个持卡人进行处理,逐笔扫描该持卡人的所有交易活动,并根据具体的交易类型分正向消费类交易、反向消费异常类交易、预借现金类交易、归还预借现金类交易进行分类汇总,从而形成按持卡人汇总的还款、记息依据记录登记到“当期账单余额情况表”中。
+</p>
+
+
+<div id="org45879c7" class="figure">
+<p><img src="./img/cred-list.jpg" alt="cred-list.jpg" />
+</p>
+</div>
+
+<p>
+这一处理过程类似于进行账户余额的快照获取,但是由于核心主机是7 X 24小时运行的,这一过程不能采用类似系统快照的方法来直接获取账户余额的快照,所以只有通过上述明细处理或者像信用卡系统的那种处理方法来完成。可以看出“账单明细处理程序”对明细处理过程主要的用途是:锁定并细化该卡在账单日后的那一刻的各类余额情况(包括积数情况)。由于进行了账单处理,账单日后持卡人所发生的各类交易虽然会影响到卡内账户的余额,但是却不会影响“当期账单余额情况表”中的内容,因此这张表实际上为我们提供了在贷记卡系统中按时间段分期的余额构成表中上期余额构成那一栏的所有信息,这样我们后期的还款、计息等处理程序就可以依据这张表的内容将当期和上期的余额分开处理。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4fcd75c" class="outline-3">
+<h3 id="org4fcd75c"><span class="section-number-3">7.5</span> 制卡、销卡过程</h3>
+<div class="outline-text-3" id="text-7-5">
+
+<div id="orgc3be676" class="figure">
+<p><img src="./img/card-make-destory.jpg" alt="card-make-destory.jpg" />
+</p>
+</div>
+
+
+<div id="org18aaee5" class="figure">
+<p><img src="./img/make-card.jpg" alt="make-card.jpg" />
+</p>
+</div>
+
+
+<div id="org64fe50e" class="figure">
+<p><img src="./img/destory-card.jpg" alt="destory-card.jpg" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc82e550" class="outline-2">
+<h2 id="orgc82e550"><span class="section-number-2">8</span> 记账核心与综合前置</h2>
+</div>
+
+
+<div id="outline-container-orgb6ce335" class="outline-2">
+<h2 id="orgb6ce335"><span class="section-number-2">9</span> 批量任务</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+账务处理子系统作为核心银行系统的系统内核，这使得账务处理子系统的设计和实现成为商业银行核心业务系统构建过程中的一个难点。作为核心业务系统的内核，账务处理子系统一般通过批量方式完成，故也称为批量处理子系统。在构成核心银行系统的四个基本子系统中，批量处理子系统处于核心银行系统的中间位置，起着承接业务处理子系统和会计报表子系统的枢纽作用，批量处理子系统在核心银行系统所处的位置如下图所示：
+</p>
+
+
+<div id="org81810f1" class="figure">
+<p><img src="./img/job.jpg" alt="job.jpg" />
+</p>
+</div>
+
+<ol class="org-ol">
+<li>按所属数据库的不同区分，批量处理可分为：
+<ul class="org-ul">
+<li>核心业务主机批量处理；</li>
+<li>数据处理主机批量处理；</li>
+</ul></li>
+<li>按业务归属的不同区分，批量处理可分为：
+<ul class="org-ul">
+<li>会计核算</li>
+<li>对公业务</li>
+<li>个人业务</li>
+<li>信用卡业务</li>
+<li>客户信息业务</li>
+<li>数据处理业务</li>
+</ul></li>
+<li>批量处理所完成功能的不同区分，批量处理可分为：
+<ul class="org-ul">
+<li>统计分析功能
+包括核心业务批量的总分核对与试算平衡的处理。日终、月终、年终的交易数据和账户数据的统计分析。
+此外，统计分析功能也是数据处理主机批量的主要功能。</li>
+<li>交易补记账功能
+同样也是批量处理的核心功能。除了日终的补记账、清算、外汇买卖和黄金买卖的平仓处理外，还包括根据计提的统计分析结果做的内部户划转、年终汇兑损益结转、年终决算等综合核算的处理。
+批量的交易补记账功能在功能设计上是有着很大优势的，其最大的特点便是解决了内部户科目的热点问题，大大减轻了联机交易的负担，缩短了联机交易的响应时间。</li>
+<li>批量业务处理
+包括批量代收代付业务、个人贷款到期还款、信用卡自动还款、定期自动转存、基金定投和结息处理等。</li>
+<li>对外系统的数据供应
+外围的运营型应用和分析型应用，均需要从主机取得大量的交易数据和账户数据，进行后续的统计分析处理。对外围系统和应用的供数也是主机批量处理的主要功能，在整个批量处理中，对外系统的数据供应占据了较大的比重。</li>
+<li>数据移行处理
+移行主要包括 3 部分的内容：
+<ul class="org-ul">
+<li>投产移行，为版本投产准备的数据迁移，参数统一设置等处理。</li>
+<li>功能移行，包括本部机构调整、银行资产购入或资产卖出、客户信息整合等。</li>
+<li>系统维护：针对生产中心常见的变更操作等所提供的批量工具。</li>
+</ul></li>
+</ul></li>
+<li>按批量应用运行时间窗口的不同区分，批量处理可分为：
+<ul class="org-ul">
+<li>日终批量</li>
+<li>日间批量</li>
+<li>投产移行批量</li>
+</ul></li>
+</ol>
+
+
+<p>
+总体而言，批量处理的 5 大功能划分与运行时间窗口的划分并非一一对应的。批量业务处理主体是在日间批量中，但是为了更多的避免与联机交易的冲突，实际当中同样会在日终批量作业中安排大量的批量业务处理。对外围系统供数是日终批量的主要功能，但数据处理主机的日终批量运行时间实际已经是白天，甚至包括核心银行主机，也存在因为业务数据时效性性要求，在日间也有对外围应用的数据下载处理，所有这些，无疑对批量处理的性能与效率提出了极高的要求。 批量处理的功能与结构，简单的图示表示如下：
+</p>
+
+
+<div id="orge9b677c" class="figure">
+<p><img src="./img/job2.jpg" alt="job2.jpg" />
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgf40de6f" class="outline-3">
+<h3 id="orgf40de6f"><span class="section-number-3">9.1</span> 批量作业调度架构设计</h3>
+<div class="outline-text-3" id="text-9-1">
+
+<div id="org4f10917" class="figure">
+<p><img src="./img/job-arch.jpg" alt="job-arch.jpg" />
+</p>
+</div>
+
+<p>
+START1 到 STARTN，表示日间批量处理的起始作业，这些批量大部分是独立存在的，前后关联比较少，各个应用批量流程的作业可以各自开始和结束。
+STRATAD 中 STARTJOB，表示日终批量的起始作业，不同应用业务的日终批量均紧跟这个作业之后开始运行。
+应用作业，表示各自业务的批量处理作业，各应用系统间互不干扰，各自运行。
+关联作业，表示各自业务的批量处理间，存在等待关系的作业，应用间的等待关系，依靠关联作业标识其是否已经完成或是否可以开始。
+ENDAD 中 ENDJOB，表示日终批量的结束，日终所有作业均需要关联到该作业上。数据备份作业可以选择在该ENDJOB 作业结束后开始运行。
+OSTART1 到 OSTARTN，表示运行在上午的日间批量的起始作业，类似START1-STARTN。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge9b8cfe" class="outline-3">
+<h3 id="orge9b8cfe"><span class="section-number-3">9.2</span> 应用系统批量划分</h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+在并行批量的设计中，各应用的业务功能自有边界是首先可以考虑的并行划分依据。各类业务功能的自然划分，为此类批量处理的并行提供了现成可用的方法，以某商业银行的业务范围划分方法，日终的批量处理，可划分为如下几大类：
+</p>
+<ol class="org-ol">
+<li>业务支持类应用
+如核算、清算、资产管理等，为各经营类业务功能提供支持的应用，可归做一类。</li>
+<li>业务功能类应用
+如个人零售、个人贷款、个人信用卡、对公贷款、对公存款等，各类面向具体客户的经营类业务应用，应用间有明显的划分边界，可归做一类。</li>
+<li>数据处理类应用
+数据统计、筛选、下载等不直接包含对客功能的业务应用的批量处理，可归做一类。</li>
+</ol>
+
+
+<p>
+从应用归属的不同，进行日终批量功能及并行批量的设计，则日终批量功能可划为如下较为独立的几块：
+</p>
+
+
+<div id="org18b0dfc" class="figure">
+<p><img src="./img/job3.jpg" alt="job3.jpg" />
+</p>
+</div>
+
+<p>
+需要注意的几个问题：
+</p>
+<ol class="org-ol">
+<li>按业务应用划分批量处理，应在业务范围的边界下做划分，即首先尊重业务在功能、管理上已有的划分。</li>
+<li>各应用系统的划分和独立，并不意味着各应用系统间不再存在关联关系，需要从业务功能与技术处理等多个角度，发掘出内部潜在的前后关联，避免遗漏。</li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="outline-container-org2835b3c" class="outline-3">
+<h3 id="org2835b3c"><span class="section-number-3">9.3</span> 并行批量实现方法</h3>
+<div class="outline-text-3" id="text-9-3">
+<p>
+传统的批量处理，所有的数据依次顺序处理完毕，我们可将其数据分成几个大小均等的单位并行地进行处理。每个单位数据的处理方式和业务功能，都基本与原来依次顺序处理的方式一致，不同的地方是，原来由一套作业完成表中所有数据的处理，现在由多套处理逻辑相同的作业流并发来完成，数据处理的效率将得到大幅的提升。
+</p>
+
+
+<div id="org5bde0f7" class="figure">
+<p><img src="./img/job4.jpg" alt="job4.jpg" />
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org7b49c2b" class="outline-4">
+<h4 id="org7b49c2b"><span class="section-number-4">9.3.1</span> 第一步：对数据库表进行分区</h4>
+<div class="outline-text-4" id="text-9-3-1">
+<p>
+为什么要对进行数据表分区呢？当由多套作业流并发地发起对数据库表的处理时，面临的最大技术障碍是在数据页、索引页上的访问冲突。要避免并发访问冲突，则需要将数据分成若干独立的分区进行物理存储，这样并发访问数据时，不会因为访问到相同的数据页（由于相同表的不同 PARTITION 使用不同的物理存储文件），避免了因访问冲突而导致的程序死锁中断或超时中断。
+</p>
+
+<p>
+数据分区的方法有很多，可以按不同的业务功能归属分，可以按交易产生的时间分，也可以按银行分户账的归属、业务客户的归属等做区分。在金融行业的信息系统中，选择机构代号（俗称地区号）作为数据分区的基准，具有以下两点突出的优势
+</p>
+<ol class="org-ol">
+<li>在金融信息系统中，机构号是金融业务核算的基本单位，以机构号做划分，则每套批量作业流程处理的数据基本是一个较为独立的单位，与其它数据之间不存在关联性，每套作业流基本可以独立运行互不干扰。</li>
+<li>在金融信息系统中，机构号广泛出现在各类数据存储中，其存在的普遍性和易识别性，也决定了其作为分区标准的客观特性。</li>
+</ol>
+<p>
+在目前流行的关系型数据库中，例如： DB2 、ORACLE 都支持数据分区存储的策略，只需要通过表空间参数定义，为每个数据分区定义一个分区标准区间（最小值和最大值）。当有新的数据进入时，数据库会自动根据设定的参数值，将新数据存储到指定的区域，这个过程不需要人为干预。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org391e659" class="outline-4">
+<h4 id="org391e659"><span class="section-number-4">9.3.2</span> 第二步：建立批次的对应关系</h4>
+<div class="outline-text-4" id="text-9-3-2">
+<p>
+当对数据以“机构号”完成了分区存储（PARTITION）后，我们面临的是如何建立批量单位与数据间对应关系的问题。
+这样我们需要以“机构号”为基础，建立《机构号与批量单位对应表》参数表，通过该参数表，完成批量单位到机构号，也即分区数据之间的对应。对应关系具体可参考以下示例：
+</p>
+
+
+<div id="orga47e556" class="figure">
+<p><img src="./img/job5.jpg" alt="job5.jpg" />
+</p>
+</div>
+
+<p>
+上表中的批量单位 001，对应的机构号是 0001 和 0010 之间的所有机构，而批量单位 002，对应的机构号则是 0011 和 0020 之间的所有机构，批量单位003 类似。
+那么根据什么来确定一个批量单位处理多大的“机构号区间”的数据，如何确定适合的并发的批量单位个数呢？我们可按如下的方法：
+</p>
+<ol class="org-ol">
+<li>保证不同批量单位间无交叉：并行批量的设计基本原则，即是不同批量单位间不会发生并发访问的资源冲突问题，如此，在数据和批量单位规划上，应注意不同的批量单位，不会访问到相同的数据分区的数据。</li>
+<li>确定单个批量单位处理容量：机构号作为数据划分的基础，决定了最小的批量单位的处理量即是一个机构的数据，如此，可对需要处理的数据分机构号做统计，按最小数据分区的数据总量不小于单个最大机构数据的方法，确定单个批量单位的处理容量。</li>
+<li>不保持同批量单位数据均衡：根据短板理论可知，要提高系统整体的运行效率，就需要保证各个批量单位的数据基本均匀，如此各批量单位的运行时间才能基本相同，进而达到最大程度优化整体批量目的。</li>
+<li>最终确定并发批量单位总数：每个批量单位的处理容量确定后，由于总的数据量是基本固定的，这样即可确定并发批量单位的总数。</li>
+</ol>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org0bbacc6" class="outline-4">
+<h4 id="org0bbacc6"><span class="section-number-4">9.3.3</span> 第三步：建立数据访问的模式</h4>
+<div class="outline-text-4" id="text-9-3-3">
+<p>
+一个批量单位就是一套完整的作业流，作业中通过调用相应的应用程序来完成既定的业务功能。如何让每套作业流按《机构号与批量单位对应表》设定的对应方式访问数据呢？
+我们通过改造批量作业流，在作业流输入中为每套作业流分配一个特定的编号文件，通过对应的处理程序，根据作业流中输入的批量单位编号信息，结合《机构号与批量单位对应表》参数，在编号与数据分区之间，建立起对应关系，进而可以在程序内指定数据访问范围。具体范例如下：
+</p>
+<ol class="org-ol">
+<li>传统应用程序访问逻辑：
+SELECT * FROM TABLE<sub>A</sub> WHERE COLUMN<sub>A</sub> = ? AND COLUMN<sub>B</sub> = ? ……</li>
+<li>并行批量的程序访问逻辑：
+SELECT * FROM TABLE<sub>A</sub> WHERE ‘机构号’ BETWEEN 最小机构号 AND 最大机构号 AND COLUMN<sub>A</sub> = ? AND COLUMN<sub>B</sub> = ? ……</li>
+</ol>
+
+
+<p>
+按照上述的改造方法，经过对作业流和应用程序的简单改造，可以实现仅在作业流中指定批量单位信息，即可按照《批量单位与机构号对应表》设定的对应关系，并行地对海量数据做分批快速处理。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org6ac8aa9" class="outline-4">
+<h4 id="org6ac8aa9"><span class="section-number-4">9.3.4</span> 第四步：参数化设定批量单位</h4>
+<div class="outline-text-4" id="text-9-3-4">
+<p>
+经过以上的改造，作业流和应用程序并发运行的条件已经具备，下面介绍参数化设定批量单位的方法，以减少作业及程序的开发和配置工作：
+</p>
+<ol class="org-ol">
+<li>改造传统的批处理作业，在作业名的编排中，增加批量单位（编号）信息。</li>
+<li>改造作业流，为每个作业步增加流内数据，定义本套作业流对应的批量单位编号。</li>
+<li>在实际运行前，按设计好的批次数量，展开作业流，并完成作业流内批量单位编号的参数化工作。</li>
+</ol>
+
+
+<p>
+通过以上步骤，各并行单位的作业即可快速建立，未来新增批次，也可按此方式完成快速的扩展。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgead4e2d" class="outline-4">
+<h4 id="orgead4e2d"><span class="section-number-4">9.3.5</span> 第五步：并行批量作业的提交</h4>
+<div class="outline-text-4" id="text-9-3-5">
+<p>
+通过以上的手段，在静态上建立了多个批量单位，在日常的生产运行中，如何能够更准确高效地控制和管理并发作业？
+传统的批量处理方式，往往由经过专业培训的运行操作员，通过远程终端，按既定的作业排程要求，进行单个作业的逐一提交。传统的手工提交方式，不论是在工作量上，还是在准确度上，都存在诸多缺陷。随着计算机技术的提高，陆续出现了自动化调度作业的专业软件，比如 IBM 公司的 TWS 作业管理软件。 并行批量模式下，作业的数量，及批量作业排程都变得更加复杂，更加需要专业软件来管理和控制作业的运行。由于各个批量单位中的作业可以同时提交，所以同样可以通过 TWS 来完成这一复杂的工作，其原则和设计方法，与传统批量的方式是基本一致
+</p>
+
+<p>
+随着业务的高速发展，或会出现新增机构或拆分机构的需求，伴随而来的，即是新增批次的需求，在这个情况下，我们只需要增加《批量单位与机构号对应表》，根据业务要求新建对应关系，即可快速地扩展批量单位，快速完成新增机构批量系统需要完成的技术准备工作。
+</p>
+
+
+<div id="org43aefba" class="figure">
+<p><img src="./img/job6.jpg" alt="job6.jpg" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd80b4c8" class="outline-3">
+<h3 id="orgd80b4c8"><span class="section-number-3">9.4</span> 核心批量流程优化</h3>
+<div class="outline-text-3" id="text-9-4">
+<p>
+以某商业银行核心日终批量流程为例，目前日终批量的关键路径大致的流程图如下：
+</p>
+
+
+<div id="org81915ae" class="figure">
+<p><img src="./img/job7.jpg" alt="job7.jpg" />
+</p>
+</div>
+
+<p>
+围绕日终批量关键路径，可主要包括如下优化点：
+</p>
+<ol class="org-ol">
+<li>增加上一日日结业务的收口
+收口如昨日日结收口的作业包括如下：
+<ul class="org-ul">
+<li>日切后，日志解析前必须完成的业务；</li>
+<li>日志解析；</li>
+<li>补账处理，总账更新；</li>
+<li>总分核对、试算平衡处理。</li>
+</ul></li>
+<li>提前数据备份处理时间
+上一日日结业务之后，即开始数交的备份恢复，将数交批量的处理进一步提前。
+日终批量的关键完成时间点，可设计如下：
+<ul class="org-ul">
+<li>上日业务记账完成：日切后，日志解析前处理的上一日业务，总体运行时间控制在 30 分钟内。</li>
+<li>上日业务处理完成：日切后，所有上日业务完全完成入账等处理，总体运行时间控制在 1.5 个小时内。</li>
+<li>日终批量完全结束：可要求所有应用的批量处理时间控制在日切后 3 小时内。</li>
+</ul></li>
+</ol>
+
+
+<p>
+按照上述 3 点整体时间控制的要求，各应用科学地规划各自应用批量的作业执行流程，规划后的日终批量大致的流程图如下：
+</p>
+
+
+<div id="orgc597dd7" class="figure">
+<p><img src="./img/job8.jpg" alt="job8.jpg" />
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org97b4b44" class="outline-3">
+<h3 id="org97b4b44"><span class="section-number-3">9.5</span> 移行</h3>
+<div class="outline-text-3" id="text-9-5">
+<p>
+按照移行的目的区分:
+</p>
+<ol class="org-ol">
+<li>投产移行：项目或系统的投产，需要完成的数据迁移或数据结构的调整。投产移行的主要特点是一次性。对于投产移行，在设计时可以考虑停联机处理。而且程序设计时，在实现断点再续有困难的情况下可以考虑使用备份表的方式处理程序的中断。</li>
+<li>功能性移行：主要是实现自身的数据按一定规则要求的迁移。与投产移行相反，功能性移行往往是多次的。或者是不同地区顺次进行的移行。功能性移行最重要的一点，是必须支持联机 24 小时。</li>
+</ol>
+
+
+<p>
+按照移行的对象区分:
+</p>
+<ol class="org-ol">
+<li>数据移行：移行的对象是数据，主要是完成数据的迁移。包括：旧系统到新系统的数据迁移；他系统到我行系统的数据迁移；同系统内部移行，包括不同数据结构间的数据迁移，或数据自身的属性发生改变；我行自身不同系统间的移行。数据移行往往需要分行技术人员或者业务人员的配合进行。</li>
+<li>结构移行：因数据结构发生变化而做的移行。结构移行对分行依赖程度较小。</li>
+</ol>
+</div>
+
+
+
+<div id="outline-container-org131745f" class="outline-4">
+<h4 id="org131745f"><span class="section-number-4">9.5.1</span> 应用程序移行设计</h4>
+<div class="outline-text-4" id="text-9-5-1">
+<p>
+目前主要分静态程序移行和动态程序移行。静态程序适用与通常情况下的移行；而动态程序移行适用于当移行有大量的针对不同数据结构的相同操作的情况。移行程序往往具有一次性，即程序往往只运行一次。正是因为其仅运行一次，所以成败的关键就全系于其一身，因此做移行程序设计的时候，一个最重要的原则是力求移行程序的尽量简单，避免移行程序因为过于复杂而在编码时出现各类意想不到的错误。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org4b12a49" class="outline-4">
+<h4 id="org4b12a49"><span class="section-number-4">9.5.2</span> 移行的处理流程</h4>
+<div class="outline-text-4" id="text-9-5-2">
+<p>
+移行的流程根据移行对象和移行要求的不同而不同。当移行是针对某一个数据库表进行的，完成的数据库表内部的数据的属性变化（这些属性通常不是索引）。往往采用的是直接更新的方式进行。例如以前投产项目中的个人账户表的移行，需要将取款人的证据类型、证件号码、户名等内容进行更新的情况，系统设计时是采用一个程序直接完成这个表的相应字段的更新。还有一种移行的处理流程是采用的比较多的而且较为通用的模式，即表-&gt;文件-&gt;表的处理流程模式：
+</p>
+
+
+<div id="org6528df3" class="figure">
+<p><img src="./img/job10.jpg" alt="job10.jpg" />
+</p>
+</div>
+
+<p>
+这种模式是最通用的模式，尤其使在不同系统之间进行移行或者在同系统的不同数据库对象之间移行时，往往采用这种模式。 表-&gt;文件-&gt;表的移行魔术，具有如下优点：
+</p>
+<ol class="org-ol">
+<li>该模式流程清晰。将复杂的移行功能分为多步进行，使每一步的处理尽量简化；</li>
+<li>应用程序对断点再续的实现更为容易。</li>
+<li>对于数据的修改，转换，可以在移行中间文件上进行。因为主机对文件的操作处理的效率远远大于对数据库表的处理效率。所以如果移行的转换处理较为复杂的情况下，采用在中间文件上进行转换，可以在一定程度上缩短程序移行的时间。</li>
+<li>移行优化考虑发挥的余地较大。在由表到文件的过程中，可以对表进行顺读，增加应用的异步 I/O。在由文件到表的过程中，可以先对文件按照导入表的 PI 排序。这样，一方面，顺序插入，使得插入过程中，数据库对表的索引维护开销较小，提高数据导入数据库表的效率；另一方面，文件导入表之后，表内的数据不需要做 REORG便已经是顺序排列。避免了在移行完成之后，对表的维护。</li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="outline-container-org53b8d61" class="outline-4">
+<h4 id="org53b8d61"><span class="section-number-4">9.5.3</span> 移行的时间点考虑</h4>
+<div class="outline-text-4" id="text-9-5-3">
+<p>
+移行可供选择的时间点包括：日切前（日间）、日切后批前、批后。其中日切前（日间）同批后在时间点上是相同的，只是由于参照物不同导致的叫法差异。总结以往的移行，绝大多数的移行都是选择在批后进行。
+在时间点的选择上往往需要考虑的因素包括：
+</p>
+<ol class="org-ol">
+<li>版本投产的要求，尤其对与投产移行的程序，通常选择版本投产停联机的时间进行，绝大多数的情况是批后；</li>
+<li>移行数据量的考虑，比如对联机结算类日志的移行，往往选择在批后，因为此时联机结算类日志的数据量是最小的。</li>
+<li>移行当日批量的考虑，主机的日终批量往往有时间要求，移行往往不能使得主机批量的推迟，否则会影响当日日终报表下传的时间。考虑这一点，移行往往选择在批后，而不在批前。</li>
+<li>仅当少数的情况下，移行有着特殊要求，且移行时间不长的情况，需要选择在批前移行。例如，移行的目的是完成参数表的修改，而这个参数表在日切后的新工作日内，需要联机使用移行后的参数表的情况，则需要在日切后，批前完成移行，重新下载参数表。</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org5c5e036" class="outline-3">
+<h3 id="org5c5e036"><span class="section-number-3">9.6</span> 工行的核心批量</h3>
+<div class="outline-text-3" id="text-9-6">
+
+<div id="org107261a" class="figure">
+<p><img src="./img/job11.jpg" alt="job11.jpg" />
+</p>
+</div>
+
+
+<div id="orgfd3cf0a" class="figure">
+<p><img src="./img/job12.jpg" alt="job12.jpg" />
+</p>
+</div>
+
+<p>
+数据库分区（PARTITION）：将一个数据库表空间分成多个独立的存储单元，每个存储单元就叫做一个数据库分区（PARITION），每个 PARTITION 都对应一个单独的物理文件，但是多个分区在逻辑上构成一个完整的 table。 并行耦合体：并行耦合体是指多个系统共享同一套系统文件，在不同的机器上运行。多个系统互相协作，进行负载均衡，互相备份，而且系统具有良好的扩充性，提供了充足的系统资源，满足日益增长的数据处理要求。
+</p>
+</div>
+
+<div id="outline-container-orgb181563" class="outline-4">
+<h4 id="orgb181563"><span class="section-number-4">9.6.1</span> PARTITION 划分原则</h4>
+<div class="outline-text-4" id="text-9-6-1">
+
+<div id="org305faa9" class="figure">
+<p><img src="./img/job13.jpg" alt="job13.jpg" />
+</p>
+</div>
+
+<p>
+根据上述表的 PARTITION 划分情况，给出应用整合后表的 PARTITION划分设计，主要包含以下四大类：
+</p>
+<ol class="org-ol">
+<li>表不分 PARITITION</li>
+<li>分 PARTITION 的小表：表分 24 个 PARTITION</li>
+<li>数据量大表：表分 47 个 PARTITION</li>
+<li>数据量特大表：表分 206 个 PARTITION</li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="outline-container-org94d3ed3" class="outline-4">
+<h4 id="org94d3ed3"><span class="section-number-4">9.6.2</span> 逻缉整合后 PARTITION 的划分遵循以下原则：</h4>
+<div class="outline-text-4" id="text-9-6-2">
+<p>
+需要划分 PARTITION 的表有两大类：
+</p>
+<ol class="org-ol">
+<li>并行批量涉及的表。</li>
+<li>表数据量大于 2G，根据数据量增长估计将来会超过 4G 的表。另外，表记录数如果超过 500 万（如果记录长度为 400，数据量为 2G），可以考虑划分 PARTITION。</li>
+</ol>
+
+
+<p>
+PARTITION 大小：
+</p>
+<ol class="org-ol">
+<li>划分 PARTITION 后，每个 PARTITION 的大小不超过 2G。随着生产运行，如果 PARTITION 大小超过了 3.5G，考虑把该 PARTITION 细分为 2 个。</li>
+</ol>
+
+
+<p>
+PARTITION 个数：
+</p>
+<ol class="org-ol">
+<li>为了日常版本安装时，维护方便，减小维护工作量，对因为并行批量要求分 PARTITION 的小表，在 PARTITION 个数上保持统一，并且和并行批量单位相适应。对因为数据量特别大的表，在PARITION 个数上也保持统一。</li>
+<li>对大数据量表尽可能做到南方和北方的数据分在不同的PARTITION 中，以达到以下目的：
+<ul class="org-ul">
+<li>在数据回装时，南北数据可以同时回装，获得最好的并发效果，有利于数据移行。</li>
+<li>有利于并行批量单位划分。</li>
+<li>可以避免某个 PARTITION 因为南北方数据叠加，而超过 4G。</li>
+<li>保证文件数量基本和目前南北中心的 DB2 文件数量相当，不会有很大的增长。</li>
+</ul></li>
+<li>小表定义：现在生产环境，南方片分 18 个 PARTITION 的表，北方片分 27 个 PARTITION 的表。</li>
+<li>大数据量表定义：
+<ul class="org-ul">
+<li>现在生产环境，南方片分 PARTITION 个数超过 18 的表，北方片分 PARTITION 个数超过 27 的表。</li>
+<li>现在北方片分 PARTITION 27 个或南方片分 PARTITION 18 个的表，但有的 PARTITION 数据量超过 2G 或记录数超过 500 万，并有可能继续增加，需要细分 PARTITION 的表。</li>
+</ul></li>
+<li>整合目标生产环境 PARTITION 数量：
+根据上面几个 PARTITION 个数方面的原则，应用整合后小表统一划分为 24 个 PARITION，大数量量表统一划分为 47 个PARTITION，数据量特大表划分为 206 个 PARTITION。</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0bd6622" class="outline-3">
+<h3 id="org0bd6622"><span class="section-number-3">9.7</span> 并行批量单位划分原则</h3>
+<div class="outline-text-3" id="text-9-7">
+<p>
+并行批量单位的划分直接影响小表 PARTITION 的划分。并行批量单位的划分原则是：保证各个批次需要的处理的数据量基本均衡，并且处理的数据量和目前生产上一个批次处理的数据量基本相当，以保证并行批量的运行时间基本和现在生产上的运行时间差不多。目前南北方片批次的划分情况是：北方片 8 个批次、南方片 9 个批次，另外还有：总行、卡中心、香港分行 3 个特殊批次。数据逻缉整合后批量单位划分情况如下：普通分行分 16 个批次，另外还有：总行、卡中心、香港分行 3 个特殊批次。具体情况如下表：
+</p>
+
+
+<div id="orgec78e52" class="figure">
+<p><img src="./img/job14.jpg" alt="job14.jpg" />
+</p>
+</div>
+
+
+<div id="org2d53836" class="figure">
+<p><img src="./img/job15.jpg" alt="job15.jpg" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd5d569f" class="outline-2">
+<h2 id="orgd5d569f"><span class="section-number-2">10</span> 灾备</h2>
+</div>
+
+<div id="outline-container-org8526376" class="outline-2">
+<h2 id="org8526376"><span class="section-number-2">11</span> 技术架构</h2>
+</div>
+
+
+<div id="outline-container-orgb245dd4" class="outline-2">
+<h2 id="orgb245dd4"><span class="section-number-2">12</span> 业务架构</h2>
+</div>
+
+
+<div id="outline-container-org3de29a7" class="outline-2">
+<h2 id="org3de29a7"><span class="section-number-2">13</span> 支付</h2>
+</div>
+
+<div id="outline-container-org7932b2c" class="outline-2">
+<h2 id="org7932b2c"><span class="section-number-2">14</span> 中间业务</h2>
+</div>
+
+<div id="outline-container-orgb4241fd" class="outline-2">
+<h2 id="orgb4241fd"><span class="section-number-2">15</span> 资金业务、同业、票据、债务</h2>
+</div>
+
+<div id="outline-container-orgb752e31" class="outline-2">
+<h2 id="orgb752e31"><span class="section-number-2">16</span> 后记-新纪元</h2>
+</div>
+
+
+<div id="outline-container-org72ca4e2" class="outline-2">
+<h2 id="org72ca4e2"><span class="section-number-2">17</span> 疑问</h2>
+<div class="outline-text-2" id="text-17">
 <p>
 总账文件跟数据库记录是一样的吗？有了数据库记录，为什么还要总账文件？总账文件如何存储？
 </p>
@@ -580,7 +1742,7 @@
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: cooperren</p>
-<p class="date">Created: 2021-03-12 周五 17:56</p>
+<p class="date">Created: 2021-03-17 周三 20:21</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
